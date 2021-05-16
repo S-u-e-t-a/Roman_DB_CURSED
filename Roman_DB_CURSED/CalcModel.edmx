@@ -1,0 +1,790 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CalcModel" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="measure">
+          <Key>
+            <PropertyRef Name="MeasureId" />
+          </Key>
+          <Property Name="MeasureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasureName" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nom">
+          <Key>
+            <PropertyRef Name="NomId" />
+          </Key>
+          <Property Name="NomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasureId" Type="int" Nullable="false" />
+          <Property Name="NomTypeId" Type="int" Nullable="false" />
+          <Property Name="TechMapId" Type="int" />
+          <Property Name="NomName" Type="text" Nullable="false" />
+          <Property Name="NomDesc" Type="text" />
+          <Property Name="ResSpecId" Type="int" />
+        </EntityType>
+        <EntityType Name="nomtype">
+          <Key>
+            <PropertyRef Name="NomTypeId" />
+          </Key>
+          <Property Name="NomTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomTypeCaption" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderStatusId" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="NomId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orderstatus">
+          <Key>
+            <PropertyRef Name="OrderStatusId" />
+          </Key>
+          <Property Name="OrderStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderStatusCaption" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prodstage">
+          <Key>
+            <PropertyRef Name="TechMapId" />
+            <PropertyRef Name="ProdStagId" />
+          </Key>
+          <Property Name="TechMapId" Type="int" Nullable="false" />
+          <Property Name="ProdStagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProdStageName" Type="text" Nullable="false" />
+          <Property Name="ProdStageDuration" Type="time" Precision="0" Nullable="false" />
+          <Property Name="SubDivisionId" Type="int" Nullable="false" />
+          <Property Name="ProdStageNextStage" Type="int" />
+        </EntityType>
+        <EntityType Name="resspec">
+          <Key>
+            <PropertyRef Name="ResSpecId" />
+          </Key>
+          <Property Name="ResSpecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResSpecName" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="resspecnoms">
+          <Key>
+            <PropertyRef Name="NomId" />
+            <PropertyRef Name="ResSpecId" />
+          </Key>
+          <Property Name="NomId" Type="int" Nullable="false" />
+          <Property Name="ResSpecId" Type="int" Nullable="false" />
+          <Property Name="NomCount" Type="decimal" Precision="10" Scale="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="storage">
+          <Key>
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="StorageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StorageName" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="storagecontains">
+          <Key>
+            <PropertyRef Name="StorageId" />
+            <PropertyRef Name="NomId" />
+          </Key>
+          <Property Name="StorageId" Type="int" Nullable="false" />
+          <Property Name="NomId" Type="int" Nullable="false" />
+          <Property Name="NumCount" Type="decimal" Precision="10" Scale="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subdivision">
+          <Key>
+            <PropertyRef Name="SubDivisionId" />
+          </Key>
+          <Property Name="SubDivisionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubDivisionName" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="techmap">
+          <Key>
+            <PropertyRef Name="TechMapId" />
+          </Key>
+          <Property Name="TechMapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechMapName" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_nom_measure_MeasureId">
+          <End Role="measure" Type="Self.measure" Multiplicity="1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="measure">
+              <PropertyRef Name="MeasureId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nom_nomtype_NomTypeId">
+          <End Role="nomtype" Type="Self.nomtype" Multiplicity="1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nomtype">
+              <PropertyRef Name="NomTypeId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="NomTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nom_resspec_ResSpecId">
+          <End Role="resspec" Type="Self.resspec" Multiplicity="0..1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resspec">
+              <PropertyRef Name="ResSpecId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="ResSpecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nom_techmap_TechMapId">
+          <End Role="techmap" Type="Self.techmap" Multiplicity="0..1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="techmap">
+              <PropertyRef Name="TechMapId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="TechMapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_nom_NomId">
+          <End Role="nom" Type="Self.nom" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nom">
+              <PropertyRef Name="NomId" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="NomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_orderstatus_OrderStatusId">
+          <End Role="orderstatus" Type="Self.orderstatus" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orderstatus">
+              <PropertyRef Name="OrderStatusId" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_prodstage_prodstage_ProdStagId" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_prodstage_prodstage_ProdStagId" />-->
+        <Association Name="FK_ProdStage_Subdivision_SubdivisionId">
+          <End Role="subdivision" Type="Self.subdivision" Multiplicity="1" />
+          <End Role="prodstage" Type="Self.prodstage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subdivision">
+              <PropertyRef Name="SubDivisionId" />
+            </Principal>
+            <Dependent Role="prodstage">
+              <PropertyRef Name="SubDivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prodstage_techmap_TechMapId">
+          <End Role="techmap" Type="Self.techmap" Multiplicity="1" />
+          <End Role="prodstage" Type="Self.prodstage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="techmap">
+              <PropertyRef Name="TechMapId" />
+            </Principal>
+            <Dependent Role="prodstage">
+              <PropertyRef Name="TechMapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resspecnoms_nom_NomId">
+          <End Role="nom" Type="Self.nom" Multiplicity="1" />
+          <End Role="resspecnoms" Type="Self.resspecnoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nom">
+              <PropertyRef Name="NomId" />
+            </Principal>
+            <Dependent Role="resspecnoms">
+              <PropertyRef Name="NomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_storagecontains_nom_NomId">
+          <End Role="nom" Type="Self.nom" Multiplicity="1" />
+          <End Role="storagecontains" Type="Self.storagecontains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nom">
+              <PropertyRef Name="NomId" />
+            </Principal>
+            <Dependent Role="storagecontains">
+              <PropertyRef Name="NomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_storagecontains_storage_StorageId">
+          <End Role="storage" Type="Self.storage" Multiplicity="1" />
+          <End Role="storagecontains" Type="Self.storagecontains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="storage">
+              <PropertyRef Name="StorageId" />
+            </Principal>
+            <Dependent Role="storagecontains">
+              <PropertyRef Name="StorageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship7">
+          <End Role="resspec" Type="Self.resspec" Multiplicity="1" />
+          <End Role="resspecnoms" Type="Self.resspecnoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resspec">
+              <PropertyRef Name="ResSpecId" />
+            </Principal>
+            <Dependent Role="resspecnoms">
+              <PropertyRef Name="ResSpecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CalcModelContainer">
+          <EntitySet Name="measure" EntityType="Self.measure" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="nom" EntityType="Self.nom" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="nomtype" EntityType="Self.nomtype" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="orderstatus" EntityType="Self.orderstatus" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="prodstage" EntityType="Self.prodstage" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="resspec" EntityType="Self.resspec" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="resspecnoms" EntityType="Self.resspecnoms" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="storage" EntityType="Self.storage" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="storagecontains" EntityType="Self.storagecontains" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="subdivision" EntityType="Self.subdivision" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="techmap" EntityType="Self.techmap" Schema="test3" store:Type="Tables" />
+          <AssociationSet Name="FK_nom_measure_MeasureId" Association="Self.FK_nom_measure_MeasureId">
+            <End Role="measure" EntitySet="measure" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nom_nomtype_NomTypeId" Association="Self.FK_nom_nomtype_NomTypeId">
+            <End Role="nomtype" EntitySet="nomtype" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nom_resspec_ResSpecId" Association="Self.FK_nom_resspec_ResSpecId">
+            <End Role="resspec" EntitySet="resspec" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nom_techmap_TechMapId" Association="Self.FK_nom_techmap_TechMapId">
+            <End Role="techmap" EntitySet="techmap" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_nom_NomId" Association="Self.FK_order_nom_NomId">
+            <End Role="nom" EntitySet="nom" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_orderstatus_OrderStatusId" Association="Self.FK_order_orderstatus_OrderStatusId">
+            <End Role="orderstatus" EntitySet="orderstatus" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProdStage_Subdivision_SubdivisionId" Association="Self.FK_ProdStage_Subdivision_SubdivisionId">
+            <End Role="subdivision" EntitySet="subdivision" />
+            <End Role="prodstage" EntitySet="prodstage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prodstage_techmap_TechMapId" Association="Self.FK_prodstage_techmap_TechMapId">
+            <End Role="techmap" EntitySet="techmap" />
+            <End Role="prodstage" EntitySet="prodstage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resspecnoms_nom_NomId" Association="Self.FK_resspecnoms_nom_NomId">
+            <End Role="nom" EntitySet="nom" />
+            <End Role="resspecnoms" EntitySet="resspecnoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_storagecontains_nom_NomId" Association="Self.FK_storagecontains_nom_NomId">
+            <End Role="nom" EntitySet="nom" />
+            <End Role="storagecontains" EntitySet="storagecontains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_storagecontains_storage_StorageId" Association="Self.FK_storagecontains_storage_StorageId">
+            <End Role="storage" EntitySet="storage" />
+            <End Role="storagecontains" EntitySet="storagecontains" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship7" Association="Self.Relationship7">
+            <End Role="resspec" EntitySet="resspec" />
+            <End Role="resspecnoms" EntitySet="resspecnoms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CalcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="measure">
+          <Key>
+            <PropertyRef Name="MeasureId" />
+          </Key>
+          <Property Name="MeasureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasureName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_nom_measure_MeasureId" FromRole="measure" ToRole="nom" />
+        </EntityType>
+        <EntityType Name="nom">
+          <Key>
+            <PropertyRef Name="NomId" />
+          </Key>
+          <Property Name="NomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasureId" Type="Int32" Nullable="false" />
+          <Property Name="NomTypeId" Type="Int32" Nullable="false" />
+          <Property Name="TechMapId" Type="Int32" />
+          <Property Name="NomName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomDesc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="ResSpecId" Type="Int32" />
+          <NavigationProperty Name="measure" Relationship="Self.FK_nom_measure_MeasureId" FromRole="nom" ToRole="measure" />
+          <NavigationProperty Name="nomtype" Relationship="Self.FK_nom_nomtype_NomTypeId" FromRole="nom" ToRole="nomtype" />
+          <NavigationProperty Name="resspec" Relationship="Self.FK_nom_resspec_ResSpecId" FromRole="nom" ToRole="resspec" />
+          <NavigationProperty Name="techmap" Relationship="Self.FK_nom_techmap_TechMapId" FromRole="nom" ToRole="techmap" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_nom_NomId" FromRole="nom" ToRole="order" />
+          <NavigationProperty Name="resspecnoms" Relationship="Self.FK_resspecnoms_nom_NomId" FromRole="nom" ToRole="resspecnoms" />
+          <NavigationProperty Name="storagecontains" Relationship="Self.FK_storagecontains_nom_NomId" FromRole="nom" ToRole="storagecontains" />
+        </EntityType>
+        <EntityType Name="nomtype">
+          <Key>
+            <PropertyRef Name="NomTypeId" />
+          </Key>
+          <Property Name="NomTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomTypeCaption" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_nom_nomtype_NomTypeId" FromRole="nomtype" ToRole="nom" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" />
+          <Property Name="NomId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_order_nom_NomId" FromRole="order" ToRole="nom" />
+          <NavigationProperty Name="orderstatus" Relationship="Self.FK_order_orderstatus_OrderStatusId" FromRole="order" ToRole="orderstatus" />
+        </EntityType>
+        <EntityType Name="orderstatus">
+          <Key>
+            <PropertyRef Name="OrderStatusId" />
+          </Key>
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderStatusCaption" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_orderstatus_OrderStatusId" FromRole="orderstatus" ToRole="order" />
+        </EntityType>
+        <EntityType Name="prodstage">
+          <Key>
+            <PropertyRef Name="TechMapId" />
+            <PropertyRef Name="ProdStagId" />
+          </Key>
+          <Property Name="TechMapId" Type="Int32" Nullable="false" />
+          <Property Name="ProdStagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProdStageName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProdStageDuration" Type="Time" Nullable="false" />
+          <Property Name="SubDivisionId" Type="Int32" Nullable="false" />
+          <Property Name="ProdStageNextStage" Type="Int32" />
+          <NavigationProperty Name="subdivision" Relationship="Self.FK_ProdStage_Subdivision_SubdivisionId" FromRole="prodstage" ToRole="subdivision" />
+          <NavigationProperty Name="techmap" Relationship="Self.FK_prodstage_techmap_TechMapId" FromRole="prodstage" ToRole="techmap" />
+        </EntityType>
+        <EntityType Name="resspec">
+          <Key>
+            <PropertyRef Name="ResSpecId" />
+          </Key>
+          <Property Name="ResSpecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResSpecName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_nom_resspec_ResSpecId" FromRole="resspec" ToRole="nom" />
+          <NavigationProperty Name="resspecnoms" Relationship="Self.Relationship7" FromRole="resspec" ToRole="resspecnoms" />
+        </EntityType>
+        <EntityType Name="resspecnoms">
+          <Key>
+            <PropertyRef Name="NomId" />
+            <PropertyRef Name="ResSpecId" />
+          </Key>
+          <Property Name="NomId" Type="Int32" Nullable="false" />
+          <Property Name="ResSpecId" Type="Int32" Nullable="false" />
+          <Property Name="NomCount" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_resspecnoms_nom_NomId" FromRole="resspecnoms" ToRole="nom" />
+          <NavigationProperty Name="resspec" Relationship="Self.Relationship7" FromRole="resspecnoms" ToRole="resspec" />
+        </EntityType>
+        <EntityType Name="storage">
+          <Key>
+            <PropertyRef Name="StorageId" />
+          </Key>
+          <Property Name="StorageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StorageName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="storagecontains" Relationship="Self.FK_storagecontains_storage_StorageId" FromRole="storage" ToRole="storagecontains" />
+        </EntityType>
+        <EntityType Name="storagecontains">
+          <Key>
+            <PropertyRef Name="StorageId" />
+            <PropertyRef Name="NomId" />
+          </Key>
+          <Property Name="StorageId" Type="Int32" Nullable="false" />
+          <Property Name="NomId" Type="Int32" Nullable="false" />
+          <Property Name="NumCount" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_storagecontains_nom_NomId" FromRole="storagecontains" ToRole="nom" />
+          <NavigationProperty Name="storage" Relationship="Self.FK_storagecontains_storage_StorageId" FromRole="storagecontains" ToRole="storage" />
+        </EntityType>
+        <EntityType Name="subdivision">
+          <Key>
+            <PropertyRef Name="SubDivisionId" />
+          </Key>
+          <Property Name="SubDivisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubDivisionName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="prodstage" Relationship="Self.FK_ProdStage_Subdivision_SubdivisionId" FromRole="subdivision" ToRole="prodstage" />
+        </EntityType>
+        <EntityType Name="techmap">
+          <Key>
+            <PropertyRef Name="TechMapId" />
+          </Key>
+          <Property Name="TechMapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechMapName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="nom" Relationship="Self.FK_nom_techmap_TechMapId" FromRole="techmap" ToRole="nom" />
+          <NavigationProperty Name="prodstage" Relationship="Self.FK_prodstage_techmap_TechMapId" FromRole="techmap" ToRole="prodstage" />
+        </EntityType>
+        <Association Name="FK_nom_measure_MeasureId">
+          <End Role="measure" Type="Self.measure" Multiplicity="1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="measure">
+              <PropertyRef Name="MeasureId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nom_nomtype_NomTypeId">
+          <End Role="nomtype" Type="Self.nomtype" Multiplicity="1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nomtype">
+              <PropertyRef Name="NomTypeId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="NomTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nom_resspec_ResSpecId">
+          <End Role="resspec" Type="Self.resspec" Multiplicity="0..1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resspec">
+              <PropertyRef Name="ResSpecId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="ResSpecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nom_techmap_TechMapId">
+          <End Role="techmap" Type="Self.techmap" Multiplicity="0..1" />
+          <End Role="nom" Type="Self.nom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="techmap">
+              <PropertyRef Name="TechMapId" />
+            </Principal>
+            <Dependent Role="nom">
+              <PropertyRef Name="TechMapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_nom_NomId">
+          <End Role="nom" Type="Self.nom" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nom">
+              <PropertyRef Name="NomId" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="NomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resspecnoms_nom_NomId">
+          <End Role="nom" Type="Self.nom" Multiplicity="1" />
+          <End Role="resspecnoms" Type="Self.resspecnoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nom">
+              <PropertyRef Name="NomId" />
+            </Principal>
+            <Dependent Role="resspecnoms">
+              <PropertyRef Name="NomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_storagecontains_nom_NomId">
+          <End Role="nom" Type="Self.nom" Multiplicity="1" />
+          <End Role="storagecontains" Type="Self.storagecontains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nom">
+              <PropertyRef Name="NomId" />
+            </Principal>
+            <Dependent Role="storagecontains">
+              <PropertyRef Name="NomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_orderstatus_OrderStatusId">
+          <End Role="orderstatus" Type="Self.orderstatus" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orderstatus">
+              <PropertyRef Name="OrderStatusId" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProdStage_Subdivision_SubdivisionId">
+          <End Role="subdivision" Type="Self.subdivision" Multiplicity="1" />
+          <End Role="prodstage" Type="Self.prodstage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subdivision">
+              <PropertyRef Name="SubDivisionId" />
+            </Principal>
+            <Dependent Role="prodstage">
+              <PropertyRef Name="SubDivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_prodstage_techmap_TechMapId">
+          <End Role="techmap" Type="Self.techmap" Multiplicity="1" />
+          <End Role="prodstage" Type="Self.prodstage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="techmap">
+              <PropertyRef Name="TechMapId" />
+            </Principal>
+            <Dependent Role="prodstage">
+              <PropertyRef Name="TechMapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship7">
+          <End Role="resspec" Type="Self.resspec" Multiplicity="1" />
+          <End Role="resspecnoms" Type="Self.resspecnoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resspec">
+              <PropertyRef Name="ResSpecId" />
+            </Principal>
+            <Dependent Role="resspecnoms">
+              <PropertyRef Name="ResSpecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_storagecontains_storage_StorageId">
+          <End Role="storage" Type="Self.storage" Multiplicity="1" />
+          <End Role="storagecontains" Type="Self.storagecontains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="storage">
+              <PropertyRef Name="StorageId" />
+            </Principal>
+            <Dependent Role="storagecontains">
+              <PropertyRef Name="StorageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CalcEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="measure" EntityType="Self.measure" />
+          <EntitySet Name="nom" EntityType="Self.nom" />
+          <EntitySet Name="nomtype" EntityType="Self.nomtype" />
+          <EntitySet Name="order" EntityType="Self.order" />
+          <EntitySet Name="orderstatus" EntityType="Self.orderstatus" />
+          <EntitySet Name="prodstage" EntityType="Self.prodstage" />
+          <EntitySet Name="resspec" EntityType="Self.resspec" />
+          <EntitySet Name="resspecnoms" EntityType="Self.resspecnoms" />
+          <EntitySet Name="storage" EntityType="Self.storage" />
+          <EntitySet Name="storagecontains" EntityType="Self.storagecontains" />
+          <EntitySet Name="subdivision" EntityType="Self.subdivision" />
+          <EntitySet Name="techmap" EntityType="Self.techmap" />
+          <AssociationSet Name="FK_nom_measure_MeasureId" Association="Self.FK_nom_measure_MeasureId">
+            <End Role="measure" EntitySet="measure" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nom_nomtype_NomTypeId" Association="Self.FK_nom_nomtype_NomTypeId">
+            <End Role="nomtype" EntitySet="nomtype" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nom_resspec_ResSpecId" Association="Self.FK_nom_resspec_ResSpecId">
+            <End Role="resspec" EntitySet="resspec" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nom_techmap_TechMapId" Association="Self.FK_nom_techmap_TechMapId">
+            <End Role="techmap" EntitySet="techmap" />
+            <End Role="nom" EntitySet="nom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_nom_NomId" Association="Self.FK_order_nom_NomId">
+            <End Role="nom" EntitySet="nom" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resspecnoms_nom_NomId" Association="Self.FK_resspecnoms_nom_NomId">
+            <End Role="nom" EntitySet="nom" />
+            <End Role="resspecnoms" EntitySet="resspecnoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_storagecontains_nom_NomId" Association="Self.FK_storagecontains_nom_NomId">
+            <End Role="nom" EntitySet="nom" />
+            <End Role="storagecontains" EntitySet="storagecontains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_orderstatus_OrderStatusId" Association="Self.FK_order_orderstatus_OrderStatusId">
+            <End Role="orderstatus" EntitySet="orderstatus" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProdStage_Subdivision_SubdivisionId" Association="Self.FK_ProdStage_Subdivision_SubdivisionId">
+            <End Role="subdivision" EntitySet="subdivision" />
+            <End Role="prodstage" EntitySet="prodstage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_prodstage_techmap_TechMapId" Association="Self.FK_prodstage_techmap_TechMapId">
+            <End Role="techmap" EntitySet="techmap" />
+            <End Role="prodstage" EntitySet="prodstage" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship7" Association="Self.Relationship7">
+            <End Role="resspec" EntitySet="resspec" />
+            <End Role="resspecnoms" EntitySet="resspecnoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_storagecontains_storage_StorageId" Association="Self.FK_storagecontains_storage_StorageId">
+            <End Role="storage" EntitySet="storage" />
+            <End Role="storagecontains" EntitySet="storagecontains" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CalcModelContainer" CdmEntityContainer="CalcEntities">
+          <EntitySetMapping Name="measure">
+            <EntityTypeMapping TypeName="CalcModel.measure">
+              <MappingFragment StoreEntitySet="measure">
+                <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
+                <ScalarProperty Name="MeasureName" ColumnName="MeasureName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nom">
+            <EntityTypeMapping TypeName="CalcModel.nom">
+              <MappingFragment StoreEntitySet="nom">
+                <ScalarProperty Name="NomId" ColumnName="NomId" />
+                <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
+                <ScalarProperty Name="NomTypeId" ColumnName="NomTypeId" />
+                <ScalarProperty Name="TechMapId" ColumnName="TechMapId" />
+                <ScalarProperty Name="NomName" ColumnName="NomName" />
+                <ScalarProperty Name="NomDesc" ColumnName="NomDesc" />
+                <ScalarProperty Name="ResSpecId" ColumnName="ResSpecId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nomtype">
+            <EntityTypeMapping TypeName="CalcModel.nomtype">
+              <MappingFragment StoreEntitySet="nomtype">
+                <ScalarProperty Name="NomTypeId" ColumnName="NomTypeId" />
+                <ScalarProperty Name="NomTypeCaption" ColumnName="NomTypeCaption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="CalcModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="NomId" ColumnName="NomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderstatus">
+            <EntityTypeMapping TypeName="CalcModel.orderstatus">
+              <MappingFragment StoreEntitySet="orderstatus">
+                <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+                <ScalarProperty Name="OrderStatusCaption" ColumnName="OrderStatusCaption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prodstage">
+            <EntityTypeMapping TypeName="CalcModel.prodstage">
+              <MappingFragment StoreEntitySet="prodstage">
+                <ScalarProperty Name="TechMapId" ColumnName="TechMapId" />
+                <ScalarProperty Name="ProdStagId" ColumnName="ProdStagId" />
+                <ScalarProperty Name="ProdStageName" ColumnName="ProdStageName" />
+                <ScalarProperty Name="ProdStageDuration" ColumnName="ProdStageDuration" />
+                <ScalarProperty Name="SubDivisionId" ColumnName="SubDivisionId" />
+                <ScalarProperty Name="ProdStageNextStage" ColumnName="ProdStageNextStage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resspec">
+            <EntityTypeMapping TypeName="CalcModel.resspec">
+              <MappingFragment StoreEntitySet="resspec">
+                <ScalarProperty Name="ResSpecId" ColumnName="ResSpecId" />
+                <ScalarProperty Name="ResSpecName" ColumnName="ResSpecName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resspecnoms">
+            <EntityTypeMapping TypeName="CalcModel.resspecnoms">
+              <MappingFragment StoreEntitySet="resspecnoms">
+                <ScalarProperty Name="NomId" ColumnName="NomId" />
+                <ScalarProperty Name="ResSpecId" ColumnName="ResSpecId" />
+                <ScalarProperty Name="NomCount" ColumnName="NomCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="storage">
+            <EntityTypeMapping TypeName="CalcModel.storage">
+              <MappingFragment StoreEntitySet="storage">
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="storagecontains">
+            <EntityTypeMapping TypeName="CalcModel.storagecontains">
+              <MappingFragment StoreEntitySet="storagecontains">
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="NomId" ColumnName="NomId" />
+                <ScalarProperty Name="NumCount" ColumnName="NumCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subdivision">
+            <EntityTypeMapping TypeName="CalcModel.subdivision">
+              <MappingFragment StoreEntitySet="subdivision">
+                <ScalarProperty Name="SubDivisionId" ColumnName="SubDivisionId" />
+                <ScalarProperty Name="SubDivisionName" ColumnName="SubDivisionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="techmap">
+            <EntityTypeMapping TypeName="CalcModel.techmap">
+              <MappingFragment StoreEntitySet="techmap">
+                <ScalarProperty Name="TechMapId" ColumnName="TechMapId" />
+                <ScalarProperty Name="TechMapName" ColumnName="TechMapName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

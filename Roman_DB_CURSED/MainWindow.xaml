@@ -1,14 +1,210 @@
-﻿<Window x:Class="Roman_DB_CURSED.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Roman_DB_CURSED"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Roman_DB_CURSED"
+    x:Class="Roman_DB_CURSED.MainWindow"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="500" Width="1000"
+    d:DataContext="{d:DesignInstance {x:Type local:MainVM}}">
+
     <Grid>
-        <Button Height="20" Width="100">
-            
-        </Button>
+
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="Номенклатуры">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Noms}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddNom}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Спецификации">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Resspecs}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddResSpecNoms}"/>
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Склады">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Storages}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=StorageName}" />
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddStorage}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Содержание складов">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Storagecontains}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Меры измерения">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Measures}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=MeasureName}" />
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddMeasure}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказы">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Orders}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cтатусы заказов">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Orderstatus}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddOrderStatus}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Стадия производства">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Prodstages}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="resspecnoms">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Resspecnoms}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Подразделения">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Subdivisions}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddSubdivision}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Технокарта">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Techmaps}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddTechMap}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Тип номенклатуры">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Nomtypes}" IsReadOnly="True" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddNomType}" />
+                        <Button Height="50" Width="50" Content="изменить" />
+                        <Button Height="50" Width="50" Content="удалить" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>
