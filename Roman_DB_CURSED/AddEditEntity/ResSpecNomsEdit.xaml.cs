@@ -20,10 +20,9 @@ namespace Roman_DB_CURSED.AddEditEntity
     /// </summary>
     public partial class ResSpecNomsEdit : Window
     {
-        public ResSpecNomsEdit(resspecnoms rsn)
+        public ResSpecNomsEdit(resspecnoms rsn, CalcEntities db)
         {
             InitializeComponent();
-            var db = new CalcEntities();
             db.nom.Load();
             Noms = db.nom.Local.ToList();
             Resspecnoms = rsn;

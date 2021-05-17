@@ -16,7 +16,7 @@ namespace Roman_DB_CURSED.AddEditEntity
             InitializeComponent();
             this.db = db;
             db.nomtype.Load();
-            Resspecnoms = db.resspecnoms.Local.Where(x => x.ResSpecId == rs.ResSpecId).ToList();
+            //Resspecnoms = db.resspecnoms.Local.Where(x => x.ResSpecId == rs.ResSpecId).ToList();
             db.nomtype.Load();
             Measures = db.measure.Local.ToList();
             db.techmap.Load();
@@ -28,7 +28,15 @@ namespace Roman_DB_CURSED.AddEditEntity
         }
 
         public resspec Resspec { get; }
-        public List<resspecnoms> Resspecnoms { get; }
+
+        public List<resspecnoms> Resspecnoms
+        {
+            get
+            {
+                return Resspec.resspecnoms.ToList();
+            }
+        }
+
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
         public List<resspec> Resspecs { get; }
@@ -40,13 +48,12 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CalcEntities db = new CalcEntities();
-            ResSpecNomsEdit resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms(){resspec = Resspec});
+            ResSpecNomsEdit resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms(){resspec = Resspec},db);
             if (resSpecNomsEdit.ShowDialog() == true)
             {
                 resspecnoms resspecnoms = resSpecNomsEdit.Resspecnoms;
-                db.resspecnoms.Add(resspecnoms);
-                db.SaveChanges();
+                Resspec.resspecnoms.Add(resspecnoms);
+                RSNGrid.ItemsSource=Resspecnoms;
             }
         }
 
@@ -57,7 +64,7 @@ namespace Roman_DB_CURSED.AddEditEntity
             // получаем выделенный объект
             var RSN = RSNGrid.SelectedItem as resspecnoms;
 
-            var resSpecNomsEdit = new ResSpecNomsEdit(RSN); //todo чекнуть работу именно тут
+            var resSpecNomsEdit = new ResSpecNomsEdit(RSN,db); //todo чекнуть работу именно тут
 
             if (resSpecNomsEdit.ShowDialog() == true)
             {

@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Название" />
             <TextBox x:Name="namebox" Grid.Column="1"
-                     Text="{Binding NomTypeCaption, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Resspec.ResSpecName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Grid.Row="1" Text="Состав:" />
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>

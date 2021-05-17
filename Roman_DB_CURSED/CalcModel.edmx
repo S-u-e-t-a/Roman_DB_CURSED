@@ -253,18 +253,18 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище CalcModelContainer">
-          <EntitySet Name="measure" EntityType="Self.measure" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="nom" EntityType="Self.nom" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="nomtype" EntityType="Self.nomtype" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="order" EntityType="Self.order" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="orderstatus" EntityType="Self.orderstatus" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="prodstage" EntityType="Self.prodstage" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="resspec" EntityType="Self.resspec" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="resspecnoms" EntityType="Self.resspecnoms" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="storage" EntityType="Self.storage" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="storagecontains" EntityType="Self.storagecontains" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="subdivision" EntityType="Self.subdivision" Schema="test3" store:Type="Tables" />
-          <EntitySet Name="techmap" EntityType="Self.techmap" Schema="test3" store:Type="Tables" />
+          <EntitySet Name="measure" EntityType="Self.measure" Schema="" store:Type="Tables" />
+          <EntitySet Name="nom" EntityType="Self.nom" Schema="" store:Type="Tables" />
+          <EntitySet Name="nomtype" EntityType="Self.nomtype" Schema="" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="" store:Type="Tables" />
+          <EntitySet Name="orderstatus" EntityType="Self.orderstatus" Schema="" store:Type="Tables" />
+          <EntitySet Name="prodstage" EntityType="Self.prodstage" Schema="" store:Type="Tables" />
+          <EntitySet Name="resspec" EntityType="Self.resspec" Schema="" store:Type="Tables" />
+          <EntitySet Name="resspecnoms" EntityType="Self.resspecnoms" Schema="" store:Type="Tables" />
+          <EntitySet Name="storage" EntityType="Self.storage" Schema="" store:Type="Tables" />
+          <EntitySet Name="storagecontains" EntityType="Self.storagecontains" Schema="" store:Type="Tables" />
+          <EntitySet Name="subdivision" EntityType="Self.subdivision" Schema="" store:Type="Tables" />
+          <EntitySet Name="techmap" EntityType="Self.techmap" Schema="" store:Type="Tables" />
           <AssociationSet Name="FK_nom_measure_MeasureId" Association="Self.FK_nom_measure_MeasureId">
             <End Role="measure" EntitySet="measure" />
             <End Role="nom" EntitySet="nom" />
