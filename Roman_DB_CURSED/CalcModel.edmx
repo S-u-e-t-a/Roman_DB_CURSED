@@ -39,6 +39,7 @@
           <Property Name="OrderStatusId" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="NomId" Type="int" Nullable="false" />
+          <Property Name="NomCount" Type="decimal" Precision="10" Scale="10" Nullable="false" />
         </EntityType>
         <EntityType Name="orderstatus">
           <Key>
@@ -362,6 +363,7 @@
           <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" />
           <Property Name="NomId" Type="Int32" Nullable="false" />
+          <Property Name="NomCount" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="nom" Relationship="Self.FK_order_nom_NomId" FromRole="order" ToRole="nom" />
           <NavigationProperty Name="orderstatus" Relationship="Self.FK_order_orderstatus_OrderStatusId" FromRole="order" ToRole="orderstatus" />
         </EntityType>
@@ -691,6 +693,7 @@
                 <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="NomId" ColumnName="NomId" />
+                <ScalarProperty Name="NomCount" ColumnName="NomCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

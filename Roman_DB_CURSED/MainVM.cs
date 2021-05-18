@@ -132,8 +132,9 @@ namespace Roman_DB_CURSED
 
         #region Commands
 
-        private RelayCommand addMeasure;
+        #region AddCommands
 
+        private RelayCommand addMeasure;
         public RelayCommand AddMeasure
         {
             get
@@ -152,28 +153,28 @@ namespace Roman_DB_CURSED
             }
         }
 
-        private RelayCommand addStorage;
 
-        public RelayCommand AddStorage
+        private RelayCommand addNom;
+        public RelayCommand AddNom
         {
             get
             {
-                return addStorage ??
-                       (addStorage = new RelayCommand(o =>
+                return addNom ??
+                       (addNom = new RelayCommand(o =>
                        {
-                           StorageEdit storageEdit = new StorageEdit(new storage());
-                           if (storageEdit.ShowDialog() == true)
+                           NomEdit nomEdit = new NomEdit(new nom(), db);
+                           if (nomEdit.ShowDialog() == true)
                            {
-                               storage storage = storageEdit.Storage;
-                               db.storage.Add(storage);
+                               nom nom = nomEdit.Nom;
+                               db.nom.Add(nom);
                                db.SaveChanges();
                            }
                        }));
             }
         }
 
-        private RelayCommand addNomType;
 
+        private RelayCommand addNomType;
         public RelayCommand AddNomType
         {
             get
@@ -192,8 +193,28 @@ namespace Roman_DB_CURSED
             }
         }
 
-        private RelayCommand addOrderStatus;
 
+        private RelayCommand addOrder;
+        public RelayCommand AddOrder
+        {
+            get
+            {
+                return addOrder ??
+                       (addOrder = new RelayCommand(o =>
+                       {
+                           OrderEdit orderEdit = new OrderEdit(new order(),db);
+                           if (orderEdit.ShowDialog() == true)
+                           {
+                               order order = orderEdit.Order;
+                               db.order.Add(order);
+                               db.SaveChanges();
+                           }
+                       }));
+            }
+        }
+
+
+        private RelayCommand addOrderStatus;
         public RelayCommand AddOrderStatus
         {
             get
@@ -212,8 +233,48 @@ namespace Roman_DB_CURSED
             }
         }
 
-        private RelayCommand addSubdivision;
 
+        private RelayCommand addResSpec;
+        public RelayCommand AddResSpec
+        {
+            get
+            {
+                return addResSpec ??
+                       (addResSpec = new RelayCommand(o =>
+                       {
+                           ResSpecEdit resSpecEdit = new ResSpecEdit(new resspec(), db);
+                           if (resSpecEdit.ShowDialog() == true)
+                           {
+                               resspec resspec = resSpecEdit.Resspec;
+                               db.resspec.Add(resspec);
+                               db.SaveChanges();
+                           }
+                       }));
+            }
+        }
+
+
+        private RelayCommand addStorage;
+        public RelayCommand AddStorage
+        {
+            get
+            {
+                return addStorage ??
+                       (addStorage = new RelayCommand(o =>
+                       {
+                           StorageEdit storageEdit = new StorageEdit(new storage());
+                           if (storageEdit.ShowDialog() == true)
+                           {
+                               storage storage = storageEdit.Storage;
+                               db.storage.Add(storage);
+                               db.SaveChanges();
+                           }
+                       }));
+            }
+        }
+
+
+        private RelayCommand addSubdivision;
         public RelayCommand AddSubdivision
         {
             get
@@ -232,8 +293,8 @@ namespace Roman_DB_CURSED
             }
         }
 
-        private RelayCommand addTechMap;
 
+        private RelayCommand addTechMap;
         public RelayCommand AddTechMap
         {
             get
@@ -253,46 +314,8 @@ namespace Roman_DB_CURSED
         }
 
 
-        private RelayCommand addResSpecNoms;
+        #endregion
 
-        public RelayCommand AddResSpecNoms
-        {
-            get
-            {
-                return addResSpecNoms ??
-                       (addResSpecNoms = new RelayCommand(o =>
-                       {
-                           ResSpecEdit resSpecEdit = new ResSpecEdit(new resspec(),db);
-                           if (resSpecEdit.ShowDialog() == true)
-                           {
-                               resspec resspec = resSpecEdit.Resspec;
-                               db.resspec.Add(resspec);
-                               db.SaveChanges();
-                           }
-                       }));
-            }
-        }
-
-
-        private RelayCommand addNom;
-
-        public RelayCommand AddNom
-        {
-            get
-            {
-                return addNom ??
-                       (addNom = new RelayCommand(o =>
-                       {
-                           NomEdit nomEdit = new NomEdit(new nom(), db);
-                           if (nomEdit.ShowDialog() == true)
-                           {
-                               nom nom = nomEdit.Nom;
-                               db.nom.Add(nom);
-                               db.SaveChanges();
-                           }
-                       }));
-            }
-        }
 
         #endregion
     }

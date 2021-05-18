@@ -77,11 +77,8 @@ namespace Roman_DB_CURSED.AddEditEntity
             if (RSNGrid.SelectedItem == null) return;
             // получаем выделенный объект
             var RSN = RSNGrid.SelectedItem as resspecnoms;
-            if (MessageBox.Show("Вы действительно хотите удалить запись?", "Удаление записи", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                db.resspecnoms.Remove(RSN);
-                db.SaveChanges();
-            }
+            Resspec.resspecnoms.Remove(RSN);
+            RSNGrid.ItemsSource = Resspecnoms;
         }
     }
 }

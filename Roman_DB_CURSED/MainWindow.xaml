@@ -7,7 +7,7 @@
     x:Class="Roman_DB_CURSED.MainWindow"
     mc:Ignorable="d"
     Title="MainWindow" Height="500" Width="1000"
-    d:DataContext="{d:DesignInstance {x:Type local:MainVM}}">
+    d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
 
@@ -18,11 +18,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Noms}" IsReadOnly="True" />
+                    <DataGrid x:Name="NomGrid" ItemsSource="{Binding Noms}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddNom}" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить"  Click="AddNom" />
+                        <Button Height="50" Width="50" Content="изменить"  Click="EditNom"/>
+                        <Button Height="50" Width="50" Content="удалить"   Click="DelNom"/>
 
                     </StackPanel>
                 </Grid>
@@ -33,11 +33,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Resspecs}" IsReadOnly="True" />
+                    <DataGrid  x:Name="ResSpecGrid" ItemsSource="{Binding Resspecs}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddResSpecNoms}"/>
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddResSpec"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditResSpec"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelResSpec"/>
 
                     </StackPanel>
                 </Grid>
@@ -48,7 +48,7 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Storages}" IsReadOnly="True">
+                    <DataGrid x:Name="StorageGrid" AutoGenerateColumns="False" ItemsSource="{Binding Storages}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Имя" Binding="{Binding Path=StorageName}" />
 
@@ -56,9 +56,9 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddStorage}" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddStorage"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditStorage"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelStorage"/>
 
                     </StackPanel>
                 </Grid>
@@ -69,11 +69,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Storagecontains}" IsReadOnly="True" />
+                    <DataGrid  x:Name="StorageContainsGrid" ItemsSource="{Binding Storagecontains}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddStorageContains"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditStorageContains"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelStorageContains"/>
 
                     </StackPanel>
                 </Grid>
@@ -84,7 +84,7 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Measures}" IsReadOnly="True">
+                    <DataGrid  x:Name="MeasureGrid" AutoGenerateColumns="False" ItemsSource="{Binding Measures}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Имя" Binding="{Binding Path=MeasureName}" />
 
@@ -92,9 +92,9 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddMeasure}" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddMeasure"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditMeasure"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelMeasure"/>
 
                     </StackPanel>
                 </Grid>
@@ -105,11 +105,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Orders}" IsReadOnly="True" />
+                    <DataGrid  x:Name="OrderGrid" ItemsSource="{Binding Orders}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddOrder"  />
+                        <Button Height="50" Width="50" Content="изменить" Click="EditOrder"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelOrder"/>
 
                     </StackPanel>
                 </Grid>
@@ -120,11 +120,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Orderstatus}" IsReadOnly="True" />
+                    <DataGrid  x:Name="OrderStausGrid" ItemsSource="{Binding Orderstatus}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddOrderStatus}" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddOrderStatus" />
+                        <Button Height="50" Width="50" Content="изменить" Click="EditOrderStatus"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelOrderStatus"/>
 
                     </StackPanel>
                 </Grid>
@@ -135,11 +135,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Prodstages}" IsReadOnly="True" />
+                    <DataGrid  x:Name="ProdStageGrid" ItemsSource="{Binding Prodstages}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddProdStage"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditProdStage"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelProdStage"/>
 
                     </StackPanel>
                 </Grid>
@@ -150,11 +150,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Resspecnoms}" IsReadOnly="True" />
+                    <DataGrid x:Name="Grid2"  ItemsSource="{Binding Resspecnoms}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddResSpecNoms"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditResSpecNoms"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelResSpecNoms"/>
 
                     </StackPanel>
                 </Grid>
@@ -165,11 +165,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Subdivisions}" IsReadOnly="True" />
+                    <DataGrid x:Name="SubdivisionGrid"  ItemsSource="{Binding Subdivisions}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddSubdivision}" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddSubDivision"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditSubDivision"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelSubDivision"/>
 
                     </StackPanel>
                 </Grid>
@@ -180,11 +180,11 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Techmaps}" IsReadOnly="True" />
+                    <DataGrid  x:Name="TechMapGrid" ItemsSource="{Binding Techmaps}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddTechMap}" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddTechMap"/>
+                        <Button Height="50" Width="50" Content="изменить" Click="EditTechMap"/>
+                        <Button Height="50" Width="50" Content="удалить" Click="DelTechMap"/>
 
                     </StackPanel>
                 </Grid>
@@ -195,9 +195,9 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <DataGrid ItemsSource="{Binding Nomtypes}" IsReadOnly="True" />
+                    <DataGrid  x:Name="NomTypeGrid" ItemsSource="{Binding Nomtypes}" IsReadOnly="True" />
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Command="{Binding AddNomType}" />
+                        <Button Height="50" Width="50" Content="добавить" Click="AddNomType"/>
                         <Button Height="50" Width="50" Content="изменить" />
                         <Button Height="50" Width="50" Content="удалить" />
 

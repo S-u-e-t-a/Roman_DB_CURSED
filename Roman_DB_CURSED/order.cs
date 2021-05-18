@@ -18,6 +18,7 @@ namespace Roman_DB_CURSED
         public int OrderStatusId { get; set; }
         public System.DateTime OrderDate { get; set; }
         public int NomId { get; set; }
+        public decimal NomCount { get; set; }
     
         public virtual nom nom { get; set; }
         public virtual orderstatus orderstatus { get; set; }
