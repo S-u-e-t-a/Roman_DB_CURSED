@@ -1,7 +1,12 @@
 ﻿//using System.Data.Entity;
 
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using Roman_DB_CURSED.AddEditEntity;
 
 namespace Roman_DB_CURSED
@@ -27,7 +32,7 @@ namespace Roman_DB_CURSED
         }
 
 
-        #region properties
+        #region tables
 
         public BindingList<storage> Storages
         {
@@ -139,8 +144,23 @@ namespace Roman_DB_CURSED
 
         #endregion
 
+        public storage currentStorage { get; set; }
 
-
+        public List<storagecontains> CurrentStoragecontainsList
+        {
+            get
+            {
+                return currentStorage.storagecontains.ToList();
+            }
+        }
+        private void StorageCB_Selected(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            storage selectedItem = comboBox.SelectedItem as storage;
+            currentStorage = selectedItem;
+            StorageContainsGrid.ItemsSource = CurrentStoragecontainsList;
+            Trace.WriteLine("storege selected");
+        }
 
         #region Measure
 
@@ -383,11 +403,25 @@ namespace Roman_DB_CURSED
 
         private void AddStorageContains(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (currentStorage == null) return;
+            StorageContainsEdit storageEdit = new StorageContainsEdit(new storagecontains(){storage = currentStorage},db);
+            if (storageEdit.ShowDialog() == true)
+            {
+                storagecontains storagecontains = storageEdit.Storagecontains;
+                db.storagecontains.Add(storagecontains);
+                db.SaveChanges();
+                StorageContainsGrid.ItemsSource = CurrentStoragecontainsList;
+            }
         }
         private void EditStorageContains(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (StorageContainsGrid.SelectedItem == null) return;
+            var SC = StorageContainsGrid.SelectedItem as storagecontains;
+            var storageContainsEdit = new StorageContainsEdit(SC,db);
+            if (storageContainsEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
         private void DelStorageContains(object sender, System.Windows.RoutedEventArgs e)
         {

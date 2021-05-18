@@ -24,5 +24,10 @@ namespace Roman_DB_CURSED.AddEditEntity
         public List<nom> Noms { get; set; }
         public  List<orderstatus> Orderstatuses { get; set; }
         public order Order {get; set; }
+
+        private void AcceptButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

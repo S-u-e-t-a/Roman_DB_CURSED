@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
-        Title="StorageEdit" Height="450" Width="800"
+        Title="Склад" Height="450" Width="800"
         d:DataContext="{d:DesignInstance romanDbCursed:storage}">
     <Grid>
         <Grid.RowDefinitions>

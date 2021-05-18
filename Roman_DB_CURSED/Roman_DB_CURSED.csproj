@@ -276,10 +276,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BASE.sql" />
     <Content Include="CalcModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CalcModel.edmx</DependentUpon>
       <LastGenOutput>CalcModel.Context.cs</LastGenOutput>
+      <DependentUpon>CalcModel.edmx</DependentUpon>
     </Content>
     <Content Include="CalcModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

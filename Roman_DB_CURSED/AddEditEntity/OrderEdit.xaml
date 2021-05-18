@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="OrderEdit" Height="450" Width="800"
+        Title="Заказ" Height="450" Width="800"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -41,7 +41,8 @@
             <Button
                 x:Name="AcceptButton"
                 MinWidth="60"
-                Margin="5">
+                Margin="5"
+                Click="AcceptButton_OnClick">
                 OK
             </Button>
             <Button

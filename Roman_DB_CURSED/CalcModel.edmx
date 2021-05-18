@@ -39,7 +39,7 @@
           <Property Name="OrderStatusId" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="NomId" Type="int" Nullable="false" />
-          <Property Name="NomCount" Type="decimal" Precision="10" Scale="10" Nullable="false" />
+          <Property Name="NomCount" Type="decimal" Precision="20" Scale="10" Nullable="false" />
         </EntityType>
         <EntityType Name="orderstatus">
           <Key>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Roman_DB_CURSED.AddEditEntity"
         xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
-        Title="ResSpecNomsEdit" Height="120" Width="500"
+        Title="Состав спецификации" Height="120" Width="500"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
