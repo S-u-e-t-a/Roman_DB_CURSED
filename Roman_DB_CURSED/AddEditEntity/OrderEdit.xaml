@@ -1,4 +1,4 @@
-﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  x:Class="Roman_DB_CURSED.AddEditEntity.OrderEdit"
+﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Roman_DB_CURSED.AddEditEntity.OrderEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,16 +22,17 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Статус заказа" />
         <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="OrderStatusCaption"
-                  ItemsSource="{Binding Orderstatuses, Mode=OneWay}" SelectedItem="{Binding Order.orderstatus, Mode=TwoWay}" />
+                  ItemsSource="{Binding Orderstatuses, Mode=OneWay}"
+                  SelectedItem="{Binding Order.orderstatus, Mode=TwoWay}" />
         <TextBlock Grid.Row="1" Text="Дата заказа" />
-        <DatePicker Grid.Row="1" Grid.Column="1"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" />
         <TextBlock Grid.Row="2" Text="Номенклатурная позиция" />
         <ComboBox Grid.Row="2" Grid.Column="1" DisplayMemberPath="NomName"
                   ItemsSource="{Binding Noms, Mode=OneWay}" SelectedItem="{Binding Order.nom, Mode=TwoWay}" />
         <TextBlock Grid.Row="3" Text="Единица измерения" />
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <xctk:DecimalUpDown Value="{Binding Order.NomCount}" Width="150"/>
-            <TextBlock Text="{Binding Order.nom.measure.MeasureName}"/>
+            <xctk:DecimalUpDown Value="{Binding Order.NomCount}" Width="150" />
+            <TextBlock Text="{Binding Order.nom.measure.MeasureName}" />
         </StackPanel>
         <StackPanel
             Grid.Row="6"

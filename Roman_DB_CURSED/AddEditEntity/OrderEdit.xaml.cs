@@ -19,11 +19,11 @@ namespace Roman_DB_CURSED.AddEditEntity
             db.nom.Load();
             Noms = db.nom.Local.ToList();
             DataContext = this;
-
         }
+
         public List<nom> Noms { get; set; }
-        public  List<orderstatus> Orderstatuses { get; set; }
-        public order Order {get; set; }
+        public List<orderstatus> Orderstatuses { get; set; }
+        public order Order { get; set; }
 
         private void AcceptButton_OnClick(object sender, RoutedEventArgs e)
         {

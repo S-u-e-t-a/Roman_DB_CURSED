@@ -1,4 +1,5 @@
-﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  x:Class="Roman_DB_CURSED.AddEditEntity.StorageContainsEdit"
+﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        x:Class="Roman_DB_CURSED.AddEditEntity.StorageContainsEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,19 +9,19 @@
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Номенклатура"/>
-        <TextBlock Grid.Column="1"  Text="Количество"/>
+        <TextBlock Text="Номенклатура" />
+        <TextBlock Grid.Column="1" Text="Количество" />
         <ComboBox Grid.Row="1" Grid.Column="0" DisplayMemberPath="NomName"
                   ItemsSource="{Binding Noms, Mode=OneWay}" SelectedItem="{Binding Storagecontains.nom, Mode=TwoWay}" />
-        <xctk:DecimalUpDown Value="{Binding Storagecontains.NumCount}" Grid.Column="1" Grid.Row="1"/>
+        <xctk:DecimalUpDown Value="{Binding Storagecontains.NumCount}" Grid.Column="1" Grid.Row="1" />
         <StackPanel
             Grid.Row="2"
             Grid.Column="1"

@@ -10,7 +10,8 @@ namespace Roman_DB_CURSED.AddEditEntity
     /// </summary>
     public partial class ResSpecEdit : Window
     {
-        private CalcEntities db;
+        private readonly CalcEntities db;
+
         public ResSpecEdit(resspec rs, CalcEntities db)
         {
             InitializeComponent();
@@ -29,13 +30,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         public resspec Resspec { get; }
 
-        public List<resspecnoms> Resspecnoms
-        {
-            get
-            {
-                return Resspec.resspecnoms.ToList();
-            }
-        }
+        public List<resspecnoms> Resspecnoms => Resspec.resspecnoms.ToList();
 
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
@@ -48,12 +43,12 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ResSpecNomsEdit resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms(){resspec = Resspec},db);
+            ResSpecNomsEdit resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms {resspec = Resspec}, db);
             if (resSpecNomsEdit.ShowDialog() == true)
             {
                 resspecnoms resspecnoms = resSpecNomsEdit.Resspecnoms;
                 Resspec.resspecnoms.Add(resspecnoms);
-                RSNGrid.ItemsSource=Resspecnoms;
+                RSNGrid.ItemsSource = Resspecnoms;
             }
         }
 
@@ -64,7 +59,7 @@ namespace Roman_DB_CURSED.AddEditEntity
             // получаем выделенный объект
             var RSN = RSNGrid.SelectedItem as resspecnoms;
 
-            var resSpecNomsEdit = new ResSpecNomsEdit(RSN,db); //todo чекнуть работу именно тут
+            var resSpecNomsEdit = new ResSpecNomsEdit(RSN, db); //todo чекнуть работу именно тут
 
             if (resSpecNomsEdit.ShowDialog() == true)
             {

@@ -17,6 +17,7 @@ namespace Roman_DB_CURSED
     public partial class MainWindow
     {
         private readonly CalcEntities db = new CalcEntities();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +30,19 @@ namespace Roman_DB_CURSED
             {
                 Trace.WriteLine($"{VARIABLE.StorageId} {VARIABLE.StorageName}");
             */
+        }
+
+        public storage currentStorage { get; set; }
+
+        public List<storagecontains> CurrentStoragecontainsList => currentStorage.storagecontains.ToList();
+
+        private void StorageCB_Selected(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            storage selectedItem = comboBox.SelectedItem as storage;
+            currentStorage = selectedItem;
+            StorageContainsGrid.ItemsSource = CurrentStoragecontainsList;
+            Trace.WriteLine("storege selected");
         }
 
 
@@ -144,27 +158,9 @@ namespace Roman_DB_CURSED
 
         #endregion
 
-        public storage currentStorage { get; set; }
-
-        public List<storagecontains> CurrentStoragecontainsList
-        {
-            get
-            {
-                return currentStorage.storagecontains.ToList();
-            }
-        }
-        private void StorageCB_Selected(object sender, RoutedEventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            storage selectedItem = comboBox.SelectedItem as storage;
-            currentStorage = selectedItem;
-            StorageContainsGrid.ItemsSource = CurrentStoragecontainsList;
-            Trace.WriteLine("storege selected");
-        }
-
         #region Measure
 
-        private void AddMeasure(object sender, System.Windows.RoutedEventArgs e)
+        private void AddMeasure(object sender, RoutedEventArgs e)
         {
             MeasureEdit measureEdit = new MeasureEdit(new measure());
             if (measureEdit.ShowDialog() == true)
@@ -174,7 +170,8 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditMeasure(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditMeasure(object sender, RoutedEventArgs e)
         {
             if (MeasureGrid.SelectedItem == null) return;
             var M = MeasureGrid.SelectedItem as measure;
@@ -184,16 +181,16 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void DelMeasure(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelMeasure(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region Nom
 
-        private void AddNom(object sender, System.Windows.RoutedEventArgs e)
+        private void AddNom(object sender, RoutedEventArgs e)
         {
             NomEdit nomEdit = new NomEdit(new nom(), db);
             if (nomEdit.ShowDialog() == true)
@@ -203,26 +200,27 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditNom(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditNom(object sender, RoutedEventArgs e)
         {
             if (NomGrid.SelectedItem == null) return;
             var N = NomGrid.SelectedItem as nom;
-            var nomEdit = new NomEdit(N,db);
+            var nomEdit = new NomEdit(N, db);
             if (nomEdit.ShowDialog() == true)
             {
                 db.SaveChanges();
             }
         }
-        private void DelNom(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelNom(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region NomType
 
-        private void AddNomType(object sender, System.Windows.RoutedEventArgs e)
+        private void AddNomType(object sender, RoutedEventArgs e)
         {
             NomTypeEdit nomTypeEdit = new NomTypeEdit(new nomtype());
             if (nomTypeEdit.ShowDialog() == true)
@@ -232,7 +230,8 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditNomType(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditNomType(object sender, RoutedEventArgs e)
         {
             if (NomTypeGrid.SelectedItem == null) return;
             var NT = NomTypeGrid.SelectedItem as nomtype;
@@ -242,16 +241,16 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void DelNomType(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelNomType(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region Order
 
-        private void AddOrder(object sender, System.Windows.RoutedEventArgs e)
+        private void AddOrder(object sender, RoutedEventArgs e)
         {
             OrderEdit orderEdit = new OrderEdit(new order(), db);
             if (orderEdit.ShowDialog() == true)
@@ -261,26 +260,27 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditOrder(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditOrder(object sender, RoutedEventArgs e)
         {
             if (OrderGrid.SelectedItem == null) return;
             var O = OrderGrid.SelectedItem as order;
-            var orderEdit = new OrderEdit(O,db);
+            var orderEdit = new OrderEdit(O, db);
             if (orderEdit.ShowDialog() == true)
             {
                 db.SaveChanges();
             }
         }
-        private void DelOrder(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelOrder(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region OrderStatus
 
-        private void AddOrderStatus(object sender, System.Windows.RoutedEventArgs e)
+        private void AddOrderStatus(object sender, RoutedEventArgs e)
         {
             OrderStatusEdit orderStatusEdit = new OrderStatusEdit(new orderstatus());
             if (orderStatusEdit.ShowDialog() == true)
@@ -290,7 +290,8 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditOrderStatus(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditOrderStatus(object sender, RoutedEventArgs e)
         {
             if (OrderStausGrid.SelectedItem == null) return;
             var OS = OrderStausGrid.SelectedItem as orderstatus;
@@ -300,33 +301,32 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void DelOrderStatus(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelOrderStatus(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region ProdStage
 
-        private void AddProdStage(object sender, System.Windows.RoutedEventArgs e)
+        private void AddProdStage(object sender, RoutedEventArgs e)
         {
-
         }
-        private void EditProdStage(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void EditProdStage(object sender, RoutedEventArgs e)
+        {
         }
-        private void DelProdStage(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelProdStage(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region ResSpec
 
-        private void AddResSpec(object sender, System.Windows.RoutedEventArgs e)
+        private void AddResSpec(object sender, RoutedEventArgs e)
         {
             ResSpecEdit resSpecEdit = new ResSpecEdit(new resspec(), db);
             if (resSpecEdit.ShowDialog() == true)
@@ -336,43 +336,43 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditResSpec(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditResSpec(object sender, RoutedEventArgs e)
         {
             if (ResSpecGrid.SelectedItem == null) return;
             var RS = ResSpecGrid.SelectedItem as resspec;
-            var resSpecEdit = new ResSpecEdit(RS,db);
+            var resSpecEdit = new ResSpecEdit(RS, db);
             if (resSpecEdit.ShowDialog() == true)
             {
                 db.SaveChanges();
             }
         }
-        private void DelResSpec(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelResSpec(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region ResSpecNoms
 
-        private void AddResSpecNoms(object sender, System.Windows.RoutedEventArgs e)
+        private void AddResSpecNoms(object sender, RoutedEventArgs e)
         {
-
         }
-        private void EditResSpecNoms(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void EditResSpecNoms(object sender, RoutedEventArgs e)
+        {
         }
-        private void DelResSpecNoms(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelResSpecNoms(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region Storage
 
-        private void AddStorage(object sender, System.Windows.RoutedEventArgs e)
+        private void AddStorage(object sender, RoutedEventArgs e)
         {
             StorageEdit storageEdit = new StorageEdit(new storage());
             if (storageEdit.ShowDialog() == true)
@@ -382,7 +382,8 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditStorage(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditStorage(object sender, RoutedEventArgs e)
         {
             if (StorageGrid.SelectedItem == null) return;
             var S = StorageGrid.SelectedItem as storage;
@@ -392,19 +393,20 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void DelStorage(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelStorage(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region StorageContains
 
-        private void AddStorageContains(object sender, System.Windows.RoutedEventArgs e)
+        private void AddStorageContains(object sender, RoutedEventArgs e)
         {
             if (currentStorage == null) return;
-            StorageContainsEdit storageEdit = new StorageContainsEdit(new storagecontains(){storage = currentStorage},db);
+            StorageContainsEdit storageEdit =
+                new StorageContainsEdit(new storagecontains {storage = currentStorage}, db);
             if (storageEdit.ShowDialog() == true)
             {
                 storagecontains storagecontains = storageEdit.Storagecontains;
@@ -413,26 +415,27 @@ namespace Roman_DB_CURSED
                 StorageContainsGrid.ItemsSource = CurrentStoragecontainsList;
             }
         }
-        private void EditStorageContains(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditStorageContains(object sender, RoutedEventArgs e)
         {
             if (StorageContainsGrid.SelectedItem == null) return;
             var SC = StorageContainsGrid.SelectedItem as storagecontains;
-            var storageContainsEdit = new StorageContainsEdit(SC,db);
+            var storageContainsEdit = new StorageContainsEdit(SC, db);
             if (storageContainsEdit.ShowDialog() == true)
             {
                 db.SaveChanges();
             }
         }
-        private void DelStorageContains(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelStorageContains(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region SubDivision
 
-        private void AddSubDivision(object sender, System.Windows.RoutedEventArgs e)
+        private void AddSubDivision(object sender, RoutedEventArgs e)
         {
             SubdivisionEdit subdivisionEdit = new SubdivisionEdit(new subdivision());
             if (subdivisionEdit.ShowDialog() == true)
@@ -442,7 +445,8 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditSubDivision(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditSubDivision(object sender, RoutedEventArgs e)
         {
             if (SubdivisionGrid.SelectedItem == null) return;
             var S = SubdivisionGrid.SelectedItem as subdivision;
@@ -452,16 +456,16 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void DelSubDivision(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelSubDivision(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion
 
         #region TechMap
 
-        private void AddTechMap(object sender, System.Windows.RoutedEventArgs e)
+        private void AddTechMap(object sender, RoutedEventArgs e)
         {
             TechMapEdit techMapEdit = new TechMapEdit(new techmap());
             if (techMapEdit.ShowDialog() == true)
@@ -471,7 +475,8 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void EditTechMap(object sender, System.Windows.RoutedEventArgs e)
+
+        private void EditTechMap(object sender, RoutedEventArgs e)
         {
             if (TechMapGrid.SelectedItem == null) return;
             var TM = TechMapGrid.SelectedItem as techmap;
@@ -481,9 +486,9 @@ namespace Roman_DB_CURSED
                 db.SaveChanges();
             }
         }
-        private void DelTechMap(object sender, System.Windows.RoutedEventArgs e)
-        {
 
+        private void DelTechMap(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion

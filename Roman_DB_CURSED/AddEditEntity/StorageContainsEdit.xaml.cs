@@ -20,7 +20,7 @@ namespace Roman_DB_CURSED.AddEditEntity
         }
 
         public List<nom> Noms { get; }
-        public  storagecontains Storagecontains { get; set; }
+        public storagecontains Storagecontains { get; set; }
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

@@ -3,23 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Roman_DB_CURSED.AddEditEntity"
-        xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
         Title="Состав спецификации" Height="120" Width="500"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Text="Номенклатура" />
-        <TextBox  Grid.Row="1" Grid.Column="1"
+        <TextBox Grid.Row="1" Grid.Column="1"
                  Text="{Binding Resspecnoms.NomCount, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Grid.Column="1" Text="Количество" />
         <ComboBox Grid.Row="1" Grid.Column="0" DisplayMemberPath="NomName"

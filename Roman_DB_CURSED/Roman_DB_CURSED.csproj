@@ -144,7 +144,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CalcModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="MainVM.cs" />
     <Compile Include="AddEditEntity\MeasureEdit.xaml.cs">
       <DependentUpon>MeasureEdit.xaml</DependentUpon>
     </Compile>
