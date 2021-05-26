@@ -17,6 +17,7 @@ namespace Roman_DB_CURSED
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public nom()
         {
+            this.consumptionlog = new HashSet<consumptionlog>();
             this.order = new HashSet<order>();
             this.resspecnoms = new HashSet<resspecnoms>();
             this.storagecontains = new HashSet<storagecontains>();
@@ -24,14 +25,14 @@ namespace Roman_DB_CURSED
     
         public int NomId { get; set; }
         public int MeasureId { get; set; }
-        public int NomTypeId { get; set; }
         public Nullable<int> TechMapId { get; set; }
         public string NomName { get; set; }
         public string NomDesc { get; set; }
         public Nullable<int> ResSpecId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<consumptionlog> consumptionlog { get; set; }
         public virtual measure measure { get; set; }
-        public virtual nomtype nomtype { get; set; }
         public virtual resspec resspec { get; set; }
         public virtual techmap techmap { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

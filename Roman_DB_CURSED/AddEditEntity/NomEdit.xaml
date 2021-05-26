@@ -14,7 +14,6 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -25,22 +24,19 @@
         <TextBlock Grid.Row="1" Text="Описание номенклатуры" />
         <TextBox Grid.Row="1" Grid.Column="1"
                  Text="{Binding Nom.NomDesc, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock Grid.Row="2" Text="Тип номенклатуры" />
-        <ComboBox Grid.Row="2" Grid.Column="1" DisplayMemberPath="NomTypeCaption"
-                  ItemsSource="{Binding Nomtypes, Mode=OneWay}" SelectedItem="{Binding Nom.nomtype, Mode=TwoWay}" />
-        <TextBlock Grid.Row="3" Text="Единица измерения" />
-        <ComboBox Grid.Row="3" Grid.Column="1" DisplayMemberPath="MeasureName"
+        <TextBlock Grid.Row="2" Text="Единица измерения" />
+        <ComboBox Grid.Row="2" Grid.Column="1" DisplayMemberPath="MeasureName"
                   ItemsSource="{Binding Measures, Mode=OneWay}" SelectedItem="{Binding Nom.measure, Mode=TwoWay}" />
-        <TextBlock Grid.Row="4" Text="Технологическая карта" />
-        <ComboBox Grid.Row="4" Grid.Column="1" DisplayMemberPath="MeasureName"
+        <TextBlock Grid.Row="3" Text="Технологическая карта" />
+        <ComboBox Grid.Row="3" Grid.Column="1" DisplayMemberPath="TechMapName"
                   ItemsSource="{Binding Techmaps, Mode=OneWay}" SelectedItem="{Binding Nom.techmap, Mode=TwoWay}" />
-        <TextBlock Grid.Row="5" Text="Ресурсная спецификация" />
-        <ComboBox Grid.Row="5" Grid.Column="1" DisplayMemberPath="MeasureName"
+        <TextBlock Grid.Row="4" Text="Ресурсная спецификация" />
+        <ComboBox Grid.Row="4" Grid.Column="1" DisplayMemberPath="ResSpecName"
                   ItemsSource="{Binding Resspecs, Mode=OneWay}" SelectedItem="{Binding Nom.resspec, Mode=TwoWay}" />
 
 
         <StackPanel
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.Column="1"
             HorizontalAlignment="Center"
             Orientation="Horizontal">

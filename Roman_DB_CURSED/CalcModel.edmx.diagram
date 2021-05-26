@@ -4,29 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="022af8de2ebf46158b1f120198f414d3" Name="Diagram1">
-        <EntityTypeShape EntityType="CalcModel.measure" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.nom" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.nomtype" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.order" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.orderstatus" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.prodstage" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.resspec" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.resspecnoms" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.storage" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.storagecontains" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.subdivision" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CalcModel.techmap" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+      <Diagram DiagramId="fa667fa43809493aa2c3082b2d621edb" Name="Diagram1">
+        <EntityTypeShape EntityType="CalcModel.consumptionlog" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.measure" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.nom" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.order" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.orderstatus" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.prodstage" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.productionlog" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.resspec" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.resspecnoms" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.storage" Width="1.5" PointX="6" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.storagecontains" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.subdivision" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalcModel.techmap" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="CalcModel.Relationship19" ManuallyRouted="false" />
+        <AssociationConnector Association="CalcModel.Relationship20" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_nom_measure_MeasureId" ManuallyRouted="false" />
-        <AssociationConnector Association="CalcModel.FK_nom_nomtype_NomTypeId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_nom_resspec_ResSpecId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_nom_techmap_TechMapId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_order_nom_NomId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_resspecnoms_nom_NomId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_storagecontains_nom_NomId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_order_orderstatus_OrderStatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="CalcModel.FK_productionlog_order_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="CalcModel.FK_prodstage_prodstage_ProdStagId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_ProdStage_Subdivision_SubdivisionId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_prodstage_techmap_TechMapId" ManuallyRouted="false" />
+        <AssociationConnector Association="CalcModel.FK_productionlog_prodstage_ProdStagId" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.Relationship7" ManuallyRouted="false" />
         <AssociationConnector Association="CalcModel.FK_storagecontains_storage_StorageId" ManuallyRouted="false" />
       </Diagram>

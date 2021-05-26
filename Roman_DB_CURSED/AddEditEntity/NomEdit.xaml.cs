@@ -13,9 +13,6 @@ namespace Roman_DB_CURSED.AddEditEntity
         public NomEdit(nom n, CalcEntities db)
         {
             InitializeComponent();
-            db.nomtype.Load();
-            Nomtypes = db.nomtype.Local.ToList();
-            db.nomtype.Load();
             Measures = db.measure.Local.ToList();
             db.techmap.Load();
             Techmaps = db.techmap.Local.ToList();
@@ -26,7 +23,6 @@ namespace Roman_DB_CURSED.AddEditEntity
         }
 
         public nom Nom { get; }
-        public List<nomtype> Nomtypes { get; }
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
         public List<resspec> Resspecs { get; }

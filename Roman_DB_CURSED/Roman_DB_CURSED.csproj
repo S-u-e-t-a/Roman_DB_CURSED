@@ -96,11 +96,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEditEntity\ConsumptionLogEdit.xaml.cs">
+      <DependentUpon>ConsumptionLogEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditEntity\ConsumptionLogNewEdit.xaml.cs">
+      <DependentUpon>ConsumptionLogNewEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddEditEntity\NomEdit.xaml.cs">
       <DependentUpon>NomEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditEntity\NomTypeEdit.xaml.cs">
-      <DependentUpon>NomTypeEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditEntity\OrderEdit.xaml.cs">
       <DependentUpon>OrderEdit.xaml</DependentUpon>
@@ -110,6 +113,12 @@
     </Compile>
     <Compile Include="AddEditEntity\ProdStageEdit.xaml.cs">
       <DependentUpon>ProdStageEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditEntity\ProductionLogEdit.xaml.cs">
+      <DependentUpon>ProductionLogEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditEntity\ProductionLogNewEdit.xaml.cs">
+      <DependentUpon>ProductionLogNewEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditEntity\ResSpecEdit.xaml.cs">
       <DependentUpon>ResSpecEdit.xaml</DependentUpon>
@@ -129,6 +138,9 @@
     <Compile Include="AddEditEntity\TechMapEdit.xaml.cs">
       <DependentUpon>TechMapEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditEntity\MeasureEdit.xaml.cs">
+      <DependentUpon>MeasureEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CalcModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,16 +156,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CalcModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="AddEditEntity\MeasureEdit.xaml.cs">
-      <DependentUpon>MeasureEdit.xaml</DependentUpon>
+    <Compile Include="consumptionlog.cs">
+      <DependentUpon>CalcModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditEntity\ConsumptionLogProdEdit.xaml.cs">
+      <DependentUpon>ConsumptionLogProdEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="measure.cs">
       <DependentUpon>CalcModel.tt</DependentUpon>
     </Compile>
     <Compile Include="nom.cs">
-      <DependentUpon>CalcModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="nomtype.cs">
       <DependentUpon>CalcModel.tt</DependentUpon>
     </Compile>
     <Compile Include="order.cs">
@@ -163,6 +175,9 @@
       <DependentUpon>CalcModel.tt</DependentUpon>
     </Compile>
     <Compile Include="prodstage.cs">
+      <DependentUpon>CalcModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productionlog.cs">
       <DependentUpon>CalcModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
@@ -185,11 +200,15 @@
     <Compile Include="techmap.cs">
       <DependentUpon>CalcModel.tt</DependentUpon>
     </Compile>
-    <Page Include="AddEditEntity\NomEdit.xaml">
+    <Page Include="AddEditEntity\ConsumptionLogEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddEditEntity\NomTypeEdit.xaml">
+    <Page Include="AddEditEntity\ConsumptionLogNewEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditEntity\NomEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,6 +221,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddEditEntity\ProdStageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditEntity\ProductionLogEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditEntity\ProductionLogNewEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddEditEntity\TechMapEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditEntity\ConsumptionLogProdEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,8 +309,8 @@
     <Content Include="BASE.sql" />
     <Content Include="CalcModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CalcModel.Context.cs</LastGenOutput>
       <DependentUpon>CalcModel.edmx</DependentUpon>
+      <LastGenOutput>CalcModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="CalcModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

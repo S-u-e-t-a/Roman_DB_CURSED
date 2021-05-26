@@ -1,18 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Roman_DB_CURSED.AddEditEntity
 {
     /// <summary>
-    ///     Логика взаимодействия для ResSpecEdit.xaml
+    /// Логика взаимодействия для ConsumptionLogEdit.xaml
     /// </summary>
-    public partial class ResSpecEdit : Window
+    public partial class ConsumptionLogEdit : Window
     {
         private readonly CalcEntities db;
-
-        public ResSpecEdit(resspec rs, CalcEntities db)
+        public ConsumptionLogEdit(order o, CalcEntities db)
         {
             InitializeComponent();
             this.db = db;
@@ -21,13 +30,13 @@ namespace Roman_DB_CURSED.AddEditEntity
             Techmaps = db.techmap.Local.ToList();
             db.resspec.Load();
             Resspecs = db.resspec.Local.ToList();
-            Resspec = rs;
+            Order = o;
             DataContext = this;
         }
 
-        public resspec Resspec { get; }
+        public order Order { get; }
 
-        public List<resspecnoms> Resspecnoms => Resspec.resspecnoms.ToList();
+        public List<consumptionlog> Consumptionlogs => Order.productionlog.SelectMany(x=> x.consumptionlog).ToList();
 
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
@@ -37,26 +46,15 @@ namespace Roman_DB_CURSED.AddEditEntity
         {
             DialogResult = true;
         }
-
-        private void AddClick(object sender, RoutedEventArgs e)
-        {
-            ResSpecNomsEdit resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms {resspec = Resspec}, db);
-            if (resSpecNomsEdit.ShowDialog() == true)
-            {
-                resspecnoms resspecnoms = resSpecNomsEdit.Resspecnoms;
-                Resspec.resspecnoms.Add(resspecnoms);
-                RSNGrid.ItemsSource = Resspecnoms;
-            }
-        }
-
+        
         private void EditClick(object sender, RoutedEventArgs e)
         {
             // если ни одного объекта не выделено, выходим
-            if (RSNGrid.SelectedItem == null) return;
+            if (CL.SelectedItem == null) return;
             // получаем выделенный объект
-            var RSN = RSNGrid.SelectedItem as resspecnoms;
+            var consumptionlog = CL.SelectedItem as consumptionlog;
 
-            var resSpecNomsEdit = new ResSpecNomsEdit(RSN, db); //todo чекнуть работу именно тут
+            var resSpecNomsEdit = new ConsumptionLogNewEdit(consumptionlog, db); //todo чекнуть работу именно тут
 
             if (resSpecNomsEdit.ShowDialog() == true)
             {
@@ -66,11 +64,13 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void DelClick(object sender, RoutedEventArgs e)
         {
-            if (RSNGrid.SelectedItem == null) return;
+            if (CL.SelectedItem == null) return;
             // получаем выделенный объект
-            var RSN = RSNGrid.SelectedItem as resspecnoms;
-            Resspec.resspecnoms.Remove(RSN);
-            RSNGrid.ItemsSource = Resspecnoms;
+            var consumptionlog = CL.SelectedItem as consumptionlog;
+            Order.productionlog.Single(x => x == consumptionlog.productionlog).consumptionlog.Remove(consumptionlog);
+            CL.ItemsSource = Consumptionlogs;
         }
+
+       
     }
 }

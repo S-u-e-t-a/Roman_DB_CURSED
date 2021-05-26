@@ -12,23 +12,25 @@ namespace Roman_DB_CURSED
     using System;
     using System.Collections.Generic;
     
-    public partial class order
+    public partial class productionlog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public order()
+        public productionlog()
         {
-            this.productionlog = new HashSet<productionlog>();
+            this.consumptionlog = new HashSet<consumptionlog>();
         }
     
-        public int OrderId { get; set; }
-        public int OrderStatusId { get; set; }
-        public System.DateTime OrderDate { get; set; }
-        public int NomId { get; set; }
-        public decimal NomCount { get; set; }
+        public int ProductionLogId { get; set; }
+        public System.DateTime ProdStageStartTime { get; set; }
+        public int ProdStageActualDuration { get; set; }
+        public Nullable<decimal> NomCount { get; set; }
+        public Nullable<int> OrderId { get; set; }
+        public Nullable<int> ProdStagId { get; set; }
+        public Nullable<int> TechMapId { get; set; }
     
-        public virtual nom nom { get; set; }
-        public virtual orderstatus orderstatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<productionlog> productionlog { get; set; }
+        public virtual ICollection<consumptionlog> consumptionlog { get; set; }
+        public virtual order order { get; set; }
+        public virtual prodstage prodstage { get; set; }
     }
 }

@@ -43,7 +43,7 @@
                 x:Name="AcceptButton"
                 MinWidth="60"
                 Margin="5"
-                Click="AcceptButton_OnClick">
+                Click="Accept_Click">
                 OK
             </Button>
             <Button

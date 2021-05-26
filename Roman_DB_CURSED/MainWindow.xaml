@@ -10,14 +10,22 @@
 
     <Grid>
 
-        <TabControl TabStripPlacement="Left">
-            <TabItem Header="Номенклатуры">
+        <TabControl TabStripPlacement="Left" SelectionChanged="Selector_OnSelectionChanged">
+            <TabItem Header="Номенклатуры" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="NomGrid" ItemsSource="{Binding Noms}" IsReadOnly="True" />
+                    <DataGrid x:Name="NomGrid" ItemsSource="{Binding Noms}" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=NomName}" />
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Path=NomDesc}" />
+                            <DataGridTextColumn Header="Ресурсная спецификация" Binding="{Binding Path=resspec.ResSpecName}" />
+                            <DataGridTextColumn Header="Техническая карта" Binding="{Binding Path=techmap.TechMapName}" />
+                            <DataGridTextColumn Header="Единица измерения" Binding="{Binding Path=measure.MeasureName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button Height="50" Width="50" Content="добавить" Click="AddNom" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditNom" />
@@ -32,7 +40,11 @@
                         <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="ResSpecGrid" ItemsSource="{Binding Resspecs}" IsReadOnly="True" />
+                    <DataGrid x:Name="ResSpecGrid" ItemsSource="{Binding Resspecs}" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=ResSpecName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button Height="50" Width="50" Content="добавить" Click="AddResSpec" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditResSpec" />
@@ -51,8 +63,6 @@
                               IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Имя" Binding="{Binding Path=StorageName}" />
-
-
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
@@ -81,7 +91,12 @@
                                   ItemsSource="{Binding Storages}" DisplayMemberPath="StorageName" />
                     </Grid>
                     <DataGrid Grid.Row="1" x:Name="StorageContainsGrid" ItemsSource="{Binding Storagecontains}"
-                              IsReadOnly="True" />
+                              IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя номенклатуры" Binding="{Binding Path=nom.NomName}" />
+                            <DataGridTextColumn Header="Количество на складе" Binding="{Binding Path=NumCount}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="2">
                         <Button Height="50" Width="50" Content="добавить" Click="AddStorageContains" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditStorageContains" />
@@ -99,8 +114,6 @@
                               IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Имя" Binding="{Binding Path=MeasureName}" />
-
-
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
@@ -117,11 +130,22 @@
                         <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="OrderGrid" ItemsSource="{Binding Orders}" IsReadOnly="True" />
+                    <DataGrid x:Name="OrderGrid" ItemsSource="{Binding Orders}" 
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер заказа" Binding="{Binding Path=OrderId}" />
+                            <DataGridTextColumn Header="Дата заказа" Binding="{Binding Path=OrderDate}" />
+                            <DataGridTextColumn Header="Заказанная номенклатура" Binding="{Binding Path=nom.NomName}" />
+                            <DataGridTextColumn Header="Количество" Binding="{Binding Path=NomCount}" />
+                            <DataGridTextColumn Header="Единица измерения" Binding="{Binding Path=nom.measure.MeasureName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button Height="50" Width="50" Content="добавить" Click="AddOrder" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditOrder" />
                         <Button Height="50" Width="50" Content="удалить" Click="DelOrder" />
+                        <Button Height="50" Width="50" Content="Журнал потребления" Click="OpenConsuptionLog" />
+                        <Button Height="50" Width="50" Content="Журнал производства" Click="OpenProductionLog" />
 
                     </StackPanel>
                 </Grid>
@@ -132,7 +156,12 @@
                         <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="OrderStausGrid" ItemsSource="{Binding Orderstatus}" IsReadOnly="True" />
+                    <DataGrid x:Name="OrderStausGrid" ItemsSource="{Binding Orderstatus}" 
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=OrderStatusCaption}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button Height="50" Width="50" Content="добавить" Click="AddOrderStatus" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditOrderStatus" />
@@ -177,7 +206,12 @@
                         <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="SubdivisionGrid" ItemsSource="{Binding Subdivisions}" IsReadOnly="True" />
+                    <DataGrid x:Name="SubdivisionGrid" ItemsSource="{Binding Subdivisions}" 
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=SubDivisionName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button Height="50" Width="50" Content="добавить" Click="AddSubDivision" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditSubDivision" />
@@ -192,26 +226,16 @@
                         <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="TechMapGrid" ItemsSource="{Binding Techmaps}" IsReadOnly="True" />
+                    <DataGrid x:Name="TechMapGrid" ItemsSource="{Binding Techmaps}" 
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=TechMapName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button Height="50" Width="50" Content="добавить" Click="AddTechMap" />
                         <Button Height="50" Width="50" Content="изменить" Click="EditTechMap" />
                         <Button Height="50" Width="50" Content="удалить" Click="DelTechMap" />
-
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Тип номенклатуры">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
-                    <DataGrid x:Name="NomTypeGrid" ItemsSource="{Binding Nomtypes}" IsReadOnly="True" />
-                    <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Height="50" Width="50" Content="добавить" Click="AddNomType" />
-                        <Button Height="50" Width="50" Content="изменить" />
-                        <Button Height="50" Width="50" Content="удалить" />
 
                     </StackPanel>
                 </Grid>

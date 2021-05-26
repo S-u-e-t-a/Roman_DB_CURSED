@@ -25,12 +25,13 @@ namespace Roman_DB_CURSED
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<consumptionlog> consumptionlog { get; set; }
         public virtual DbSet<measure> measure { get; set; }
         public virtual DbSet<nom> nom { get; set; }
-        public virtual DbSet<nomtype> nomtype { get; set; }
         public virtual DbSet<order> order { get; set; }
         public virtual DbSet<orderstatus> orderstatus { get; set; }
         public virtual DbSet<prodstage> prodstage { get; set; }
+        public virtual DbSet<productionlog> productionlog { get; set; }
         public virtual DbSet<resspec> resspec { get; set; }
         public virtual DbSet<resspecnoms> resspecnoms { get; set; }
         public virtual DbSet<storage> storage { get; set; }

@@ -1,5 +1,6 @@
 ﻿//using System.Data.Entity;
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -110,16 +111,7 @@ namespace Roman_DB_CURSED
                 return db.measure.Local.ToBindingList();
             }
         }
-
-        public BindingList<nomtype> Nomtypes
-        {
-            get
-            {
-                db.nomtype.Load();
-                return db.nomtype.Local.ToBindingList();
-            }
-        }
-
+        
         public BindingList<order> Orders
         {
             get
@@ -218,35 +210,6 @@ namespace Roman_DB_CURSED
 
         #endregion
 
-        #region NomType
-
-        private void AddNomType(object sender, RoutedEventArgs e)
-        {
-            NomTypeEdit nomTypeEdit = new NomTypeEdit(new nomtype());
-            if (nomTypeEdit.ShowDialog() == true)
-            {
-                nomtype nomtype = nomTypeEdit.Nomtype;
-                db.nomtype.Add(nomtype);
-                db.SaveChanges();
-            }
-        }
-
-        private void EditNomType(object sender, RoutedEventArgs e)
-        {
-            if (NomTypeGrid.SelectedItem == null) return;
-            var NT = NomTypeGrid.SelectedItem as nomtype;
-            var nomTypeEdit = new NomTypeEdit(NT);
-            if (nomTypeEdit.ShowDialog() == true)
-            {
-                db.SaveChanges();
-            }
-        }
-
-        private void DelNomType(object sender, RoutedEventArgs e)
-        {
-        }
-
-        #endregion
 
         #region Order
 
@@ -274,6 +237,28 @@ namespace Roman_DB_CURSED
 
         private void DelOrder(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void OpenConsuptionLog(object sender, RoutedEventArgs e)
+        {
+            if (OrderGrid.SelectedItem == null) return;
+            var O = OrderGrid.SelectedItem as order;
+            var consumptionLogEdit = new ConsumptionLogEdit(O, db);
+            if (consumptionLogEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
+        }
+
+        private void OpenProductionLog(object sender, RoutedEventArgs e)
+        {
+            if (OrderGrid.SelectedItem == null) return;
+            var O = OrderGrid.SelectedItem as order;
+            var productionLogEdit = new ProductionLogEdit(O, db);
+            if (productionLogEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
 
         #endregion
@@ -312,10 +297,24 @@ namespace Roman_DB_CURSED
 
         private void AddProdStage(object sender, RoutedEventArgs e)
         {
+            ProdStageEdit prodStage = new ProdStageEdit(new prodstage(), db);
+            if (prodStage.ShowDialog() == true)
+            {
+                prodstage prodstage = prodStage.Prodstage;
+                db.prodstage.Add(prodstage);
+                db.SaveChanges();
+            }
         }
 
         private void EditProdStage(object sender, RoutedEventArgs e)
         {
+            if (ProdStageGrid.SelectedItem == null) return;
+            var ps = ProdStageGrid.SelectedItem as prodstage;
+            var prodStageEdit = new ProdStageEdit(ps, db);
+            if (prodStageEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
 
         private void DelProdStage(object sender, RoutedEventArgs e)
@@ -492,5 +491,19 @@ namespace Roman_DB_CURSED
         }
 
         #endregion
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ((sender as TabControl).SelectedValue as TabItem).UpdateLayout();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+               
+            }
+            
+        }
     }
 }

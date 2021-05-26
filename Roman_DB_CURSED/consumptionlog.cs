@@ -12,18 +12,13 @@ namespace Roman_DB_CURSED
     using System;
     using System.Collections.Generic;
     
-    public partial class nomtype
+    public partial class consumptionlog
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public nomtype()
-        {
-            this.nom = new HashSet<nom>();
-        }
+        public int NomId { get; set; }
+        public int ProductionLogId { get; set; }
+        public Nullable<decimal> NomCount { get; set; }
     
-        public int NomTypeId { get; set; }
-        public string NomTypeCaption { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<nom> nom { get; set; }
+        public virtual nom nom { get; set; }
+        public virtual productionlog productionlog { get; set; }
     }
 }

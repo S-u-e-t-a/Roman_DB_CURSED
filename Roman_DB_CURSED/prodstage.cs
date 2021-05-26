@@ -14,14 +14,26 @@ namespace Roman_DB_CURSED
     
     public partial class prodstage
     {
-        public int TechMapId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public prodstage()
+        {
+            this.prodstage1 = new HashSet<prodstage>();
+            this.productionlog = new HashSet<productionlog>();
+        }
+    
+        public Nullable<int> TechMapId { get; set; }
         public int ProdStagId { get; set; }
         public string ProdStageName { get; set; }
-        public System.TimeSpan ProdStageDuration { get; set; }
+        public int ProdStageDuration { get; set; }
         public int SubDivisionId { get; set; }
         public Nullable<int> ProdStageNextStage { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<prodstage> prodstage1 { get; set; }
+        public virtual prodstage prodstage2 { get; set; }
         public virtual subdivision subdivision { get; set; }
         public virtual techmap techmap { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productionlog> productionlog { get; set; }
     }
 }
