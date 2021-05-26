@@ -27,20 +27,26 @@ namespace Roman_DB_CURSED.AddEditEntity
             nextstagebox.SelectedValue = Prodstage.ProdStageNextStage;*/
         }
 
+
         public prodstage Prodstage { get; }
         public List<techmap> Techmaps { get; }
 
         public List<resspec> Resspecs { get; }
 
-        public List<prodstage> Prodstages => Prodstage.techmap.prodstage.ToList();
+        public List<prodstage> Prodstages
+        {
+            get { return Prodstage.techmap.prodstage.ToList(); }
+        }
 
         public List<subdivision> Subdivisions { get; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
             //Measure.MeasureName = namebox.Text;
             DialogResult = true;
         }
+
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {

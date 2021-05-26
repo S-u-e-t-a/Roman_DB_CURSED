@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
-        Title="Склад" Height="450" Width="800"
+        ResizeMode="NoResize"
+        Title="Склад" Height="150" Width="400"
         d:DataContext="{d:DesignInstance romanDbCursed:storage}">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,7 +14,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Text="Название" />
@@ -21,7 +22,8 @@
                  Text="{Binding StorageName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             Orientation="Horizontal">
             <Button

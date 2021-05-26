@@ -12,6 +12,7 @@ namespace Roman_DB_CURSED.AddEditEntity
     {
         private readonly CalcEntities db;
 
+
         public ConsumptionLogNewEdit(consumptionlog cl, CalcEntities db)
         {
             InitializeComponent();
@@ -21,11 +22,19 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = this;
         }
 
+
         public consumptionlog Consumptionlog { get; }
         public List<nom> Noms { get; }
 
-        public List<productionlog> Productionlogs => db.productionlog.Local
-            .Where(x => x.OrderId == Consumptionlog.productionlog.OrderId).ToList();
+        public List<productionlog> Productionlogs
+        {
+            get
+            {
+                return db.productionlog.Local
+                    .Where(x => x.OrderId == Consumptionlog.productionlog.OrderId).ToList();
+            }
+        }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

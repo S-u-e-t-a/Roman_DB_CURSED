@@ -14,7 +14,9 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = OrderStatus;
         }
 
+
         public orderstatus OrderStatus { get; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

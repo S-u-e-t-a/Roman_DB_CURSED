@@ -14,7 +14,9 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = Storage;
         }
 
+
         public storage Storage { get; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

@@ -21,9 +21,11 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = this;
         }
 
+
         public List<nom> Noms { get; set; }
         public List<orderstatus> Orderstatuses { get; set; }
         public order Order { get; set; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

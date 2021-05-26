@@ -12,6 +12,7 @@ namespace Roman_DB_CURSED.AddEditEntity
     {
         private readonly CalcEntities db;
 
+
         public ResSpecEdit(resspec rs, CalcEntities db)
         {
             InitializeComponent();
@@ -25,18 +26,24 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = this;
         }
 
+
         public resspec Resspec { get; }
 
-        public List<resspecnoms> Resspecnoms => Resspec.resspecnoms.ToList();
+        public List<resspecnoms> Resspecnoms
+        {
+            get { return Resspec.resspecnoms.ToList(); }
+        }
 
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
         public List<resspec> Resspecs { get; }
 
+
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }
+
 
         private void AddClick(object sender, RoutedEventArgs e)
         {
@@ -49,6 +56,7 @@ namespace Roman_DB_CURSED.AddEditEntity
             }
         }
 
+
         private void EditClick(object sender, RoutedEventArgs e)
         {
             // если ни одного объекта не выделено, выходим
@@ -60,6 +68,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
             if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
         }
+
 
         private void DelClick(object sender, RoutedEventArgs e)
         {

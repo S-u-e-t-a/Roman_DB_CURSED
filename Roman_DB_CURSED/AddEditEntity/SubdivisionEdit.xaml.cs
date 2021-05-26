@@ -14,7 +14,9 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = Subdivision;
         }
 
+
         public subdivision Subdivision { get; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

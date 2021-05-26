@@ -19,8 +19,10 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = this;
         }
 
+
         public resspecnoms Resspecnoms { get; }
         public List<nom> Noms { get; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

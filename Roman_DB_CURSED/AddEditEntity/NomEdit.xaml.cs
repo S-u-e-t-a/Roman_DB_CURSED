@@ -22,10 +22,12 @@ namespace Roman_DB_CURSED.AddEditEntity
             DataContext = this;
         }
 
+
         public nom Nom { get; }
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
         public List<resspec> Resspecs { get; }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {

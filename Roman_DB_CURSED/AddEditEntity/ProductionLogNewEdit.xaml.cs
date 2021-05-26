@@ -12,6 +12,7 @@ namespace Roman_DB_CURSED.AddEditEntity
     {
         private readonly CalcEntities db;
 
+
         public ProductionLogNewEdit(productionlog n, CalcEntities db)
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace Roman_DB_CURSED.AddEditEntity
             Productionlog = n;
             DataContext = this;
         }
+
 
         public productionlog Productionlog { get; }
 

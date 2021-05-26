@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+
 using Roman_DB_CURSED.AddEditEntity;
 
 namespace Roman_DB_CURSED
@@ -19,23 +20,23 @@ namespace Roman_DB_CURSED
     {
         private readonly CalcEntities db = new CalcEntities();
 
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
             db = new CalcEntities();
-            /*CalcEntities db = new CalcEntities();
-            db.storage.Load();
-            var storages = db.storage.Local.ToBindingList();
-            foreach (var VARIABLE in storages)
-            {
-                Trace.WriteLine($"{VARIABLE.StorageId} {VARIABLE.StorageName}");
-            */
+            StorageCB.SelectedIndex = 0;
         }
+
 
         public storage currentStorage { get; set; }
 
-        public List<storagecontains> CurrentStoragecontainsList => currentStorage.storagecontains.ToList();
+        public List<storagecontains> CurrentStoragecontainsList
+        {
+            get { return currentStorage.storagecontains.ToList(); }
+        }
+
 
         private void StorageCB_Selected(object sender, RoutedEventArgs e)
         {
@@ -45,6 +46,7 @@ namespace Roman_DB_CURSED
             StorageContainsGrid.ItemsSource = CurrentStoragecontainsList;
             Trace.WriteLine("storege selected");
         }
+
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -66,6 +68,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.storage.Load();
+
                 return db.storage.Local.ToBindingList();
             }
         }
@@ -75,6 +78,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.nom.Load();
+
                 return db.nom.Local.ToBindingList();
             }
         }
@@ -84,6 +88,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.resspec.Load();
+
                 return db.resspec.Local.ToBindingList();
             }
         }
@@ -93,6 +98,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.resspecnoms.Load();
+
                 return db.resspecnoms.Local.ToBindingList();
             }
         }
@@ -102,6 +108,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.subdivision.Load();
+
                 return db.subdivision.Local.ToBindingList();
             }
         }
@@ -111,6 +118,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.storagecontains.Load();
+
                 return db.storagecontains.Local.ToBindingList();
             }
         }
@@ -120,6 +128,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.measure.Load();
+
                 return db.measure.Local.ToBindingList();
             }
         }
@@ -129,6 +138,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.order.Load();
+
                 return db.order.Local.ToBindingList();
             }
         }
@@ -138,6 +148,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.orderstatus.Load();
+
                 return db.orderstatus.Local.ToBindingList();
             }
         }
@@ -147,6 +158,7 @@ namespace Roman_DB_CURSED
             get
             {
                 db.prodstage.Load();
+
                 return db.prodstage.Local.ToBindingList();
             }
         }
@@ -156,11 +168,13 @@ namespace Roman_DB_CURSED
             get
             {
                 db.techmap.Load();
+
                 return db.techmap.Local.ToBindingList();
             }
         }
 
         #endregion
+
 
         #region Measure
 
@@ -175,6 +189,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditMeasure(object sender, RoutedEventArgs e)
         {
             if (MeasureGrid.SelectedItem == null) return;
@@ -183,11 +198,23 @@ namespace Roman_DB_CURSED
             if (measureEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelMeasure(object sender, RoutedEventArgs e)
         {
+            if (MeasureGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var measure = MeasureGrid.SelectedItem as measure;
+                db.measure.Remove(measure);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region Nom
 
@@ -202,6 +229,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditNom(object sender, RoutedEventArgs e)
         {
             if (NomGrid.SelectedItem == null) return;
@@ -210,8 +238,19 @@ namespace Roman_DB_CURSED
             if (nomEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelNom(object sender, RoutedEventArgs e)
         {
+            if (NomGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var nom = NomGrid.SelectedItem as nom;
+                db.nom.Remove(nom);
+                db.SaveChanges();
+            }
         }
 
         #endregion
@@ -230,6 +269,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditOrder(object sender, RoutedEventArgs e)
         {
             if (OrderGrid.SelectedItem == null) return;
@@ -238,9 +278,21 @@ namespace Roman_DB_CURSED
             if (orderEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelOrder(object sender, RoutedEventArgs e)
         {
+            if (OrderGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var order = OrderGrid.SelectedItem as order;
+                db.order.Remove(order);
+                db.SaveChanges();
+            }
         }
+
 
         private void OpenConsuptionLog(object sender, RoutedEventArgs e)
         {
@@ -249,6 +301,7 @@ namespace Roman_DB_CURSED
             var consumptionLogEdit = new ConsumptionLogEdit(O, db);
             if (consumptionLogEdit.ShowDialog() == true) db.SaveChanges();
         }
+
 
         private void OpenProductionLog(object sender, RoutedEventArgs e)
         {
@@ -259,6 +312,7 @@ namespace Roman_DB_CURSED
         }
 
         #endregion
+
 
         #region OrderStatus
 
@@ -273,6 +327,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditOrderStatus(object sender, RoutedEventArgs e)
         {
             if (OrderStausGrid.SelectedItem == null) return;
@@ -281,11 +336,23 @@ namespace Roman_DB_CURSED
             if (orderStatusEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelOrderStatus(object sender, RoutedEventArgs e)
         {
+            if (OrderStausGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var orderstatus = OrderStausGrid.SelectedItem as orderstatus;
+                db.orderstatus.Remove(orderstatus);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region ProdStage
 
@@ -300,6 +367,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditProdStage(object sender, RoutedEventArgs e)
         {
             if (ProdStageGrid.SelectedItem == null) return;
@@ -308,11 +376,23 @@ namespace Roman_DB_CURSED
             if (prodStageEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelProdStage(object sender, RoutedEventArgs e)
         {
+            if (ProdStageGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var prodstage = ProdStageGrid.SelectedItem as prodstage;
+                db.prodstage.Remove(prodstage);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region ResSpec
 
@@ -327,6 +407,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditResSpec(object sender, RoutedEventArgs e)
         {
             if (ResSpecGrid.SelectedItem == null) return;
@@ -335,11 +416,23 @@ namespace Roman_DB_CURSED
             if (resSpecEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelResSpec(object sender, RoutedEventArgs e)
         {
+            if (ResSpecGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var resspec = ResSpecGrid.SelectedItem as resspec;
+                db.resspec.Remove(resspec);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region ResSpecNoms
 
@@ -347,15 +440,18 @@ namespace Roman_DB_CURSED
         {
         }
 
+
         private void EditResSpecNoms(object sender, RoutedEventArgs e)
         {
         }
+
 
         private void DelResSpecNoms(object sender, RoutedEventArgs e)
         {
         }
 
         #endregion
+
 
         #region Storage
 
@@ -370,6 +466,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditStorage(object sender, RoutedEventArgs e)
         {
             if (StorageGrid.SelectedItem == null) return;
@@ -378,11 +475,23 @@ namespace Roman_DB_CURSED
             if (storageEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelStorage(object sender, RoutedEventArgs e)
         {
+            if (StorageGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var storage = StorageGrid.SelectedItem as storage;
+                db.storage.Remove(storage);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region StorageContains
 
@@ -400,6 +509,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditStorageContains(object sender, RoutedEventArgs e)
         {
             if (StorageContainsGrid.SelectedItem == null) return;
@@ -408,11 +518,23 @@ namespace Roman_DB_CURSED
             if (storageContainsEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelStorageContains(object sender, RoutedEventArgs e)
         {
+            if (StorageContainsGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var storagecontains = StorageContainsGrid.SelectedItem as storagecontains;
+                db.storagecontains.Remove(storagecontains);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region SubDivision
 
@@ -427,6 +549,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditSubDivision(object sender, RoutedEventArgs e)
         {
             if (SubdivisionGrid.SelectedItem == null) return;
@@ -435,11 +558,23 @@ namespace Roman_DB_CURSED
             if (subdivisionEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelSubDivision(object sender, RoutedEventArgs e)
         {
+            if (SubdivisionGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var subdivision = SubdivisionGrid.SelectedItem as subdivision;
+                db.subdivision.Remove(subdivision);
+                db.SaveChanges();
+            }
         }
 
         #endregion
+
 
         #region TechMap
 
@@ -454,6 +589,7 @@ namespace Roman_DB_CURSED
             }
         }
 
+
         private void EditTechMap(object sender, RoutedEventArgs e)
         {
             if (TechMapGrid.SelectedItem == null) return;
@@ -462,8 +598,19 @@ namespace Roman_DB_CURSED
             if (techMapEdit.ShowDialog() == true) db.SaveChanges();
         }
 
+
         private void DelTechMap(object sender, RoutedEventArgs e)
         {
+            if (TechMapGrid.SelectedItem == null) return;
+            // получаем выделенный объект
+            var result = MessageBox.Show("Вы действительно хотите удалить текущую запись?", "", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var techmap = TechMapGrid.SelectedItem as techmap;
+                db.techmap.Remove(techmap);
+                db.SaveChanges();
+            }
         }
 
         #endregion
