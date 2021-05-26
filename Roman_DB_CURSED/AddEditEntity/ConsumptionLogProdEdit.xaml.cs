@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Roman_DB_CURSED.AddEditEntity;
 
 namespace Roman_DB_CURSED
 {
     /// <summary>
-    /// Логика взаимодействия для ConsumptionLogProdEdit.xaml
+    ///     Логика взаимодействия для ConsumptionLogProdEdit.xaml
     /// </summary>
     public partial class ConsumptionLogProdEdit : Window
     {
         private readonly CalcEntities db;
+
         public ConsumptionLogProdEdit(productionlog prl, CalcEntities db)
         {
             InitializeComponent();
@@ -31,7 +22,7 @@ namespace Roman_DB_CURSED
             Techmaps = db.techmap.Local.ToList();
             db.resspec.Load();
             Resspecs = db.resspec.Local.ToList();
-           
+
             Productionlog = prl;
             //Order = o;
             DataContext = this;
@@ -39,12 +30,8 @@ namespace Roman_DB_CURSED
 
         public order Order { get; }
         public productionlog Productionlog { get; }
-        public List<consumptionlog> Consumptionlogs {
-            get
-            {
-                return Productionlog.consumptionlog.ToList();
-            }
-        }
+
+        public List<consumptionlog> Consumptionlogs => Productionlog.consumptionlog.ToList();
 
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
@@ -64,10 +51,7 @@ namespace Roman_DB_CURSED
 
             var resSpecNomsEdit = new ConsumptionLogNewEdit(consumptionlog, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true)
-            {
-                db.SaveChanges();
-            }
+            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
         }
 
         private void DelClick(object sender, RoutedEventArgs e)
@@ -81,7 +65,8 @@ namespace Roman_DB_CURSED
 
         private void AddConsumptionLog(object sender, RoutedEventArgs e)
         {
-            ConsumptionLogNewEdit consumptionLogNewEdit = new ConsumptionLogNewEdit(new consumptionlog(){productionlog = Productionlog}, db);
+            ConsumptionLogNewEdit consumptionLogNewEdit =
+                new ConsumptionLogNewEdit(new consumptionlog {productionlog = Productionlog}, db);
             if (consumptionLogNewEdit.ShowDialog() == true)
             {
                 consumptionlog consumptionlog = consumptionLogNewEdit.Consumptionlog;
@@ -91,4 +76,3 @@ namespace Roman_DB_CURSED
         }
     }
 }
-

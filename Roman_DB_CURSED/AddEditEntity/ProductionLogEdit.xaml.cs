@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Roman_DB_CURSED.AddEditEntity
 {
     /// <summary>
-    /// Логика взаимодействия для ProductionLogEdit.xaml
+    ///     Логика взаимодействия для ProductionLogEdit.xaml
     /// </summary>
     public partial class ProductionLogEdit : Window
     {
         private readonly CalcEntities db;
+
         public ProductionLogEdit(order o, CalcEntities db)
         {
             InitializeComponent();
@@ -58,10 +49,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
             var resSpecNomsEdit = new ConsumptionLogNewEdit(consumptionlog, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true)
-            {
-                db.SaveChanges();
-            }
+            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
         }
 
         private void DelClick(object sender, RoutedEventArgs e)
@@ -76,7 +64,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            ProductionLogNewEdit productionLogNewEdit = new ProductionLogNewEdit(new productionlog(){order = Order}, db);
+            ProductionLogNewEdit productionLogNewEdit = new ProductionLogNewEdit(new productionlog {order = Order}, db);
             if (productionLogNewEdit.ShowDialog() == true)
             {
                 productionlog productionlog = productionLogNewEdit.Productionlog;
@@ -90,11 +78,7 @@ namespace Roman_DB_CURSED.AddEditEntity
             if (CL.SelectedItem == null) return;
             var O = CL.SelectedItem as productionlog;
             var consumptionLogEdit = new ConsumptionLogProdEdit(O, db);
-            if (consumptionLogEdit.ShowDialog() == true)
-            {
-                db.SaveChanges();
-            }
+            if (consumptionLogEdit.ShowDialog() == true) db.SaveChanges();
         }
     }
 }
-

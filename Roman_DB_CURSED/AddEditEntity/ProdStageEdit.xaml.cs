@@ -14,7 +14,7 @@ namespace Roman_DB_CURSED.AddEditEntity
         public ProdStageEdit(prodstage ps, CalcEntities db)
         {
             InitializeComponent();
-            
+
             db.techmap.Load();
             Techmaps = db.techmap.Local.ToList();
             db.resspec.Load();
@@ -32,13 +32,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         public List<resspec> Resspecs { get; }
 
-        public List<prodstage> Prodstages
-        {
-            get
-            {
-                return Prodstage.techmap.prodstage.ToList();
-            }
-        }
+        public List<prodstage> Prodstages => Prodstage.techmap.prodstage.ToList();
 
         public List<subdivision> Subdivisions { get; }
 
@@ -49,8 +43,9 @@ namespace Roman_DB_CURSED.AddEditEntity
         }
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {/*
-            Prodstage.ProdStageNextStage = null;*/
+        {
+            /*
+                        Prodstage.ProdStageNextStage = null;*/
             nextstagebox.ItemsSource = Prodstages;
             Prodstage.ProdStageNextStage = null;
         }

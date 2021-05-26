@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Roman_DB_CURSED.AddEditEntity
 {
     /// <summary>
-    /// Логика взаимодействия для ConsumptionLogEdit.xaml
+    ///     Логика взаимодействия для ConsumptionLogEdit.xaml
     /// </summary>
     public partial class ConsumptionLogEdit : Window
     {
         private readonly CalcEntities db;
+
         public ConsumptionLogEdit(order o, CalcEntities db)
         {
             InitializeComponent();
@@ -36,7 +27,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         public order Order { get; }
 
-        public List<consumptionlog> Consumptionlogs => Order.productionlog.SelectMany(x=> x.consumptionlog).ToList();
+        public List<consumptionlog> Consumptionlogs => Order.productionlog.SelectMany(x => x.consumptionlog).ToList();
 
         public List<measure> Measures { get; }
         public List<techmap> Techmaps { get; }
@@ -46,7 +37,7 @@ namespace Roman_DB_CURSED.AddEditEntity
         {
             DialogResult = true;
         }
-        
+
         private void EditClick(object sender, RoutedEventArgs e)
         {
             // если ни одного объекта не выделено, выходим
@@ -56,10 +47,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
             var resSpecNomsEdit = new ConsumptionLogNewEdit(consumptionlog, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true)
-            {
-                db.SaveChanges();
-            }
+            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
         }
 
         private void DelClick(object sender, RoutedEventArgs e)
@@ -70,7 +58,5 @@ namespace Roman_DB_CURSED.AddEditEntity
             Order.productionlog.Single(x => x == consumptionlog.productionlog).consumptionlog.Remove(consumptionlog);
             CL.ItemsSource = Consumptionlogs;
         }
-
-       
     }
 }

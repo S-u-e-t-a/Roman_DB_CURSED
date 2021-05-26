@@ -58,10 +58,7 @@ namespace Roman_DB_CURSED.AddEditEntity
 
             var resSpecNomsEdit = new ResSpecNomsEdit(RSN, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true)
-            {
-                db.SaveChanges();
-            }
+            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
         }
 
         private void DelClick(object sender, RoutedEventArgs e)
