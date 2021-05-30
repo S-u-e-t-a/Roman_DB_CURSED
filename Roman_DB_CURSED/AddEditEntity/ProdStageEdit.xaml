@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Производственная стадия" Height="450" Width="800"
+        MinHeight="300"
+        MinWidth="600"
+        Title="Производственная стадия" Height="300" Width="600"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,30 +16,31 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Технологическая карта" />
-        <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="TechMapName"
-                  SelectionChanged="Selector_OnSelectionChanged"
-                  ItemsSource="{Binding Techmaps, Mode=OneWay}" SelectedItem="{Binding Prodstage.techmap, Mode=TwoWay}" />
 
-
-        <TextBlock Grid.Row="1" Text="Название производственной стадии" />
-        <TextBox Grid.Row="1" Grid.Column="1"
+        <TextBlock Grid.Row="0" Text="Название производственной стадии" />
+        <TextBox Grid.Row="0" Grid.Column="1"
                  Text="{Binding Prodstage.ProdStageName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="1" Text="Подразделение" />
+        <ComboBox Grid.Row="1" Grid.Column="1" DisplayMemberPath="SubDivisionName"
+                  ItemsSource="{Binding Subdivisions, Mode=OneWay}"
+                  SelectedItem="{Binding Prodstage.subdivision, Mode=TwoWay}" />
+
 
         <TextBlock Grid.Row="2" Text="Длительность стадии" />
         <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Prodstage.ProdStageDuration}" />
 
-        <TextBlock Grid.Row="3" Text="Подразделение" />
-        <ComboBox Grid.Row="3" Grid.Column="1" DisplayMemberPath="SubDivisionName"
-                  ItemsSource="{Binding Subdivisions, Mode=OneWay}"
-                  SelectedItem="{Binding Prodstage.subdivision, Mode=TwoWay}" />
+
+        <TextBlock Grid.Row="3" Text="Порядок операции" />
+        <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" Value="{Binding Prodstage.ProdStageIndex}" />
+
 
         <TextBlock Grid.Row="4" Text="Следующая стадия" />
         <ComboBox Grid.Row="4" Grid.Column="1" DisplayMemberPath="ProdStageName" x:Name="nextstagebox"

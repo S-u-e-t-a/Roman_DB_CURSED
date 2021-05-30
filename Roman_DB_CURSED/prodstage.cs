@@ -21,12 +21,13 @@ namespace Roman_DB_CURSED
             this.productionlog = new HashSet<productionlog>();
         }
     
-        public Nullable<int> TechMapId { get; set; }
+        public int TechMapId { get; set; }
         public int ProdStagId { get; set; }
         public string ProdStageName { get; set; }
         public int ProdStageDuration { get; set; }
         public int SubDivisionId { get; set; }
         public Nullable<int> ProdStageNextStage { get; set; }
+        public int ProdStageIndex { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<prodstage> prodstage1 { get; set; }

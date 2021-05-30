@@ -72,7 +72,11 @@ namespace Roman_DB_CURSED
 
         private void DelClick(object sender, RoutedEventArgs e)
         {
-            if (CL.SelectedItem == null) return;
+            if (CL.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var consumptionlog = CL.SelectedItem as consumptionlog;
             Consumptionlogs.Remove(consumptionlog);
@@ -82,11 +86,11 @@ namespace Roman_DB_CURSED
 
         private void AddConsumptionLog(object sender, RoutedEventArgs e)
         {
-            ConsumptionLogNewEdit consumptionLogNewEdit =
+            var consumptionLogNewEdit =
                 new ConsumptionLogNewEdit(new consumptionlog {productionlog = Productionlog}, db);
             if (consumptionLogNewEdit.ShowDialog() == true)
             {
-                consumptionlog consumptionlog = consumptionLogNewEdit.Consumptionlog;
+                var consumptionlog = consumptionLogNewEdit.Consumptionlog;
                 Productionlog.consumptionlog.Add(consumptionlog);
                 CL.ItemsSource = Consumptionlogs;
             }

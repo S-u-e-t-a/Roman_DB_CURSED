@@ -15,27 +15,38 @@ namespace Roman_DB_CURSED.AddEditEntity
         {
             InitializeComponent();
 
-            db.techmap.Load();
-            Techmaps = db.techmap.Local.ToList();
+
             db.resspec.Load();
             Resspecs = db.resspec.Local.ToList();
             db.subdivision.Load();
             Subdivisions = db.subdivision.Local.ToList();
             Prodstage = ps;
             DataContext = this;
+
             /*nextstagebox.ItemsSource = Prodstages;
             nextstagebox.SelectedValue = Prodstage.ProdStageNextStage;*/
         }
 
 
         public prodstage Prodstage { get; }
-        public List<techmap> Techmaps { get; }
-
         public List<resspec> Resspecs { get; }
 
         public List<prodstage> Prodstages
         {
-            get { return Prodstage.techmap.prodstage.ToList(); }
+            get
+            {
+                try
+                {
+                    var ps = Prodstage.techmap.prodstage.ToList();
+                    ps.Add(null);
+
+                    return ps;
+                }
+                catch
+                {
+                    return new List<prodstage>();
+                }
+            }
         }
 
         public List<subdivision> Subdivisions { get; }

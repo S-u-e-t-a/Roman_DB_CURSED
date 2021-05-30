@@ -7,6 +7,7 @@
         MinHeight="450"
         MinWidth="700"
         Title="Стадии производства" Height="450" Width="700"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid>
@@ -27,7 +28,7 @@
                     <RowDefinition />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="CL" AutoGenerateColumns="False" IsReadOnly="True"
+                <DataGrid x:Name="CL" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="EditClick"
                           ItemsSource="{Binding  Productionlogs}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Технологическая карта"

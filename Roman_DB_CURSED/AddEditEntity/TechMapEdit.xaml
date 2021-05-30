@@ -3,24 +3,75 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
         Title="Технологическая карта" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance romanDbCursed:techmap}">
+        WindowStartupLocation="CenterScreen"
+        d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
+
+            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Название" />
+
+
+        <TextBlock Grid.Row="1" Text="Состав:" />
         <TextBox x:Name="namebox" Grid.Column="1"
-                 Text="{Binding TechMapName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Techmap.TechMapName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="PSGrid" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="EditClick"
+                      ItemsSource="{Binding  Prodstages}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя операции" Binding="{Binding Path=ProdStageName}" />
+                    <DataGridTextColumn Header="Порядок операции" Binding="{Binding Path=ProdStageIndex}" />
+                    <DataGridTextColumn Header="Длительльность операции"
+                                        Binding="{Binding Path=ProdStageDuration}" />
+                    <DataGridTextColumn Header="Подразделение"
+                                        Binding="{Binding Path=subdivision.SubDivisionName}" />
+                    <DataGridTextColumn Header="Следующая операция"
+                                        Binding="{Binding Path=prodstage2.ProdStageName}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    MinWidth="60"
+                    Margin="5"
+                    Click="AddClick">
+                    Добавить
+                </Button>
+                <Button
+                    MinWidth="60"
+                    Margin="5"
+                    Click="EditClick">
+                    Изменить
+                </Button>
+                <Button
+                    MinWidth="60"
+                    Margin="5"
+                    Click="DelClick">
+                    Удалить
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
         <StackPanel
-            Grid.Row="1"
+            Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Center"
             Orientation="Horizontal">

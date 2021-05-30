@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
-        Title="Подразделение" Height="450" Width="800"
+        MinHeight="120"
+        MinWidth="420"
+        Title="Подразделение" Height="120" Width="420"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance romanDbCursed:subdivision}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

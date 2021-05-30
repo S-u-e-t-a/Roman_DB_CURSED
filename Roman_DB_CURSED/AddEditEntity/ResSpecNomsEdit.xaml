@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         Title="Состав спецификации" Height="130" Width="500"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>

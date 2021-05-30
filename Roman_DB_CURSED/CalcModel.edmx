@@ -53,12 +53,13 @@
           <Key>
             <PropertyRef Name="ProdStagId" />
           </Key>
-          <Property Name="TechMapId" Type="int" />
+          <Property Name="TechMapId" Type="int" Nullable="false" />
           <Property Name="ProdStagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProdStageName" Type="text" Nullable="false" />
           <Property Name="ProdStageDuration" Type="int" Nullable="false" />
           <Property Name="SubDivisionId" Type="int" Nullable="false" />
           <Property Name="ProdStageNextStage" Type="int" />
+          <Property Name="ProdStageIndex" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="productionlog">
           <Key>
@@ -203,7 +204,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_prodstage_techmap_TechMapId">
-          <End Role="techmap" Type="Self.techmap" Multiplicity="0..1" />
+          <End Role="techmap" Type="Self.techmap" Multiplicity="1" />
           <End Role="prodstage" Type="Self.prodstage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="techmap">
@@ -456,12 +457,13 @@
           <Key>
             <PropertyRef Name="ProdStagId" />
           </Key>
-          <Property Name="TechMapId" Type="Int32" />
+          <Property Name="TechMapId" Type="Int32" Nullable="false" />
           <Property Name="ProdStagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProdStageName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProdStageDuration" Type="Int32" Nullable="false" />
           <Property Name="SubDivisionId" Type="Int32" Nullable="false" />
           <Property Name="ProdStageNextStage" Type="Int32" />
+          <Property Name="ProdStageIndex" Type="Int32" Nullable="false" />
           <NavigationProperty Name="prodstage1" Relationship="Self.FK_prodstage_prodstage_ProdStagId" FromRole="prodstage" ToRole="prodstage1" />
           <NavigationProperty Name="prodstage2" Relationship="Self.FK_prodstage_prodstage_ProdStagId" FromRole="prodstage1" ToRole="prodstage" />
           <NavigationProperty Name="subdivision" Relationship="Self.FK_ProdStage_Subdivision_SubdivisionId" FromRole="prodstage" ToRole="subdivision" />
@@ -684,7 +686,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_prodstage_techmap_TechMapId">
-          <End Role="techmap" Type="Self.techmap" Multiplicity="0..1" />
+          <End Role="techmap" Type="Self.techmap" Multiplicity="1" />
           <End Role="prodstage" Type="Self.prodstage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="techmap">
@@ -873,6 +875,7 @@
                 <ScalarProperty Name="ProdStageDuration" ColumnName="ProdStageDuration" />
                 <ScalarProperty Name="SubDivisionId" ColumnName="SubDivisionId" />
                 <ScalarProperty Name="ProdStageNextStage" ColumnName="ProdStageNextStage" />
+                <ScalarProperty Name="ProdStageIndex" ColumnName="ProdStageIndex" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -152,26 +152,16 @@
     <Compile Include="AddEditEntity\MeasureEdit.xaml.cs">
       <DependentUpon>MeasureEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CalcModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CalcModel.Context.tt</DependentUpon>
+    <Compile Include="AddEditEntity\ConsumptionLogProdEdit.xaml.cs">
+      <DependentUpon>ConsumptionLogProdEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="CalcModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CalcModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CalcModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CalcModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="consumptionlog.cs">
       <DependentUpon>CalcModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditEntity\ConsumptionLogProdEdit.xaml.cs">
-      <DependentUpon>ConsumptionLogProdEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="measure.cs">
       <DependentUpon>CalcModel.tt</DependentUpon>
@@ -277,6 +267,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CalcModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalcModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalcModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalcModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -318,8 +318,8 @@
     <Content Include="BASE.sql" />
     <Content Include="CalcModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CalcModel.edmx</DependentUpon>
       <LastGenOutput>CalcModel.Context.cs</LastGenOutput>
+      <DependentUpon>CalcModel.edmx</DependentUpon>
     </Content>
     <Content Include="CalcModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -327,6 +327,7 @@
       <LastGenOutput>CalcModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

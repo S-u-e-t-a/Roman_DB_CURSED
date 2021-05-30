@@ -7,6 +7,7 @@
         MinHeight="450"
         MinWidth="500"
         Title="Все затраченные материалы по заказу" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid>
@@ -28,7 +29,7 @@
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="CL" AutoGenerateColumns="False" IsReadOnly="True"
-                          ItemsSource="{Binding  Consumptionlogs}">
+                          ItemsSource="{Binding  Consumptionlogs}" MouseDoubleClick="EditClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Стадия производства"
                                             Binding="{Binding  productionlog.prodstage.ProdStageName}" />

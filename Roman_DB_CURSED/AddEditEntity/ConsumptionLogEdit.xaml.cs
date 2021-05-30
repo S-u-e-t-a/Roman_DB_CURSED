@@ -48,19 +48,30 @@ namespace Roman_DB_CURSED.AddEditEntity
         private void EditClick(object sender, RoutedEventArgs e)
         {
             // если ни одного объекта не выделено, выходим
-            if (CL.SelectedItem == null) return;
+            if (CL.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var consumptionlog = CL.SelectedItem as consumptionlog;
 
             var resSpecNomsEdit = new ConsumptionLogNewEdit(consumptionlog, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
+            if (resSpecNomsEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
 
 
         private void DelClick(object sender, RoutedEventArgs e)
         {
-            if (CL.SelectedItem == null) return;
+            if (CL.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var consumptionlog = CL.SelectedItem as consumptionlog;
             Order.productionlog.Single(x => x == consumptionlog.productionlog).consumptionlog.Remove(consumptionlog);

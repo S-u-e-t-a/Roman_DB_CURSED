@@ -6,12 +6,13 @@
         xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Склад" Height="150" Width="400"
+        Title="Склад" Height="120" Width="400"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance romanDbCursed:storage}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70" />

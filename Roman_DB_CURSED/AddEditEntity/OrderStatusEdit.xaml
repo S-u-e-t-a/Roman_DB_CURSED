@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:romanDbCursed="clr-namespace:Roman_DB_CURSED"
         mc:Ignorable="d"
-        Title="Статус заказа" Height="450" Width="800"
+        MinHeight="100"
+        MinWidth="450"
+        Title="Статус заказа" Height="100" Width="450"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance romanDbCursed:orderstatus}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

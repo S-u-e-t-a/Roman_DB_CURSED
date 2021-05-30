@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Номенклатура" Height="200" Width="600"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>

@@ -47,10 +47,10 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            ResSpecNomsEdit resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms {resspec = Resspec}, db);
+            var resSpecNomsEdit = new ResSpecNomsEdit(new resspecnoms {resspec = Resspec}, db);
             if (resSpecNomsEdit.ShowDialog() == true)
             {
-                resspecnoms resspecnoms = resSpecNomsEdit.Resspecnoms;
+                var resspecnoms = resSpecNomsEdit.Resspecnoms;
                 Resspec.resspecnoms.Add(resspecnoms);
                 RSNGrid.ItemsSource = Resspecnoms;
             }
@@ -60,19 +60,30 @@ namespace Roman_DB_CURSED.AddEditEntity
         private void EditClick(object sender, RoutedEventArgs e)
         {
             // если ни одного объекта не выделено, выходим
-            if (RSNGrid.SelectedItem == null) return;
+            if (RSNGrid.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var RSN = RSNGrid.SelectedItem as resspecnoms;
 
             var resSpecNomsEdit = new ResSpecNomsEdit(RSN, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
+            if (resSpecNomsEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
 
 
         private void DelClick(object sender, RoutedEventArgs e)
         {
-            if (RSNGrid.SelectedItem == null) return;
+            if (RSNGrid.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var RSN = RSNGrid.SelectedItem as resspecnoms;
             Resspec.resspecnoms.Remove(RSN);

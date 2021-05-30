@@ -53,19 +53,30 @@ namespace Roman_DB_CURSED.AddEditEntity
         private void EditClick(object sender, RoutedEventArgs e)
         {
             // если ни одного объекта не выделено, выходим
-            if (CL.SelectedItem == null) return;
+            if (CL.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var consumptionlog = CL.SelectedItem as consumptionlog;
 
             var resSpecNomsEdit = new ConsumptionLogNewEdit(consumptionlog, db); //todo чекнуть работу именно тут
 
-            if (resSpecNomsEdit.ShowDialog() == true) db.SaveChanges();
+            if (resSpecNomsEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
 
 
         private void DelClick(object sender, RoutedEventArgs e)
         {
-            if (CL.SelectedItem == null) return;
+            if (CL.SelectedItem == null)
+            {
+                return;
+            }
+
             // получаем выделенный объект
             var consumptionlog = CL.SelectedItem as consumptionlog;
             Order.productionlog.Single(x => x == consumptionlog.productionlog).consumptionlog.Remove(consumptionlog);
@@ -75,10 +86,10 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            ProductionLogNewEdit productionLogNewEdit = new ProductionLogNewEdit(new productionlog {order = Order}, db);
+            var productionLogNewEdit = new ProductionLogNewEdit(new productionlog {order = Order}, db);
             if (productionLogNewEdit.ShowDialog() == true)
             {
-                productionlog productionlog = productionLogNewEdit.Productionlog;
+                var productionlog = productionLogNewEdit.Productionlog;
                 Order.productionlog.Add(productionlog);
                 CL.ItemsSource = Productionlogs;
             }
@@ -87,10 +98,17 @@ namespace Roman_DB_CURSED.AddEditEntity
 
         private void OpenConsumptionLog(object sender, RoutedEventArgs e)
         {
-            if (CL.SelectedItem == null) return;
+            if (CL.SelectedItem == null)
+            {
+                return;
+            }
+
             var O = CL.SelectedItem as productionlog;
             var consumptionLogEdit = new ConsumptionLogProdEdit(O, db);
-            if (consumptionLogEdit.ShowDialog() == true) db.SaveChanges();
+            if (consumptionLogEdit.ShowDialog() == true)
+            {
+                db.SaveChanges();
+            }
         }
     }
 }
