@@ -321,6 +321,7 @@ namespace Roman_DB_CURSED
             if (result == MessageBoxResult.Yes)
             {
                 var order = OrderGrid.SelectedItem as order;
+                order.productionlog.Clear();
                 db.order.Remove(order);
                 db.SaveChanges();
             }
